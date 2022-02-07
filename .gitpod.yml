@@ -1,5 +1,5 @@
 tasks:
-  - command: sdk install java 17.0.2-open
+  - command: sdkman_auto_answer=true sdk install java 17.0.2-open
   - command: mvn install spring-boot:start spring-boot:stop
 
 ports:
