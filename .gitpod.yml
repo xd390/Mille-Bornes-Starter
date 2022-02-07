@@ -1,9 +1,11 @@
 tasks:
-  - name: Install JDK 17
-    init: sdkman_auto_answer=true sdk install java 17.0.2-open
   - name: First compile
-    command: mvn install spring-boot:start
+    init: mvn package -Dmaven.test.skip=true
+    command: mvn
 
 ports:
   - port: 8080
     onOpen: open-preview
+image:
+  file: .gitpod.Dockerfile
+
