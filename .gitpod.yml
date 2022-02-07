@@ -1,6 +1,8 @@
 tasks:
-  - command: sdkman_auto_answer=true sdk install java 17.0.2-open
-  - command: mvn install spring-boot:start spring-boot:stop
+  - name: Install JDK 17
+    init: sdkman_auto_answer=true sdk install java 17.0.2-open
+  - name: First compile
+    command: mvn install spring-boot:start
 
 ports:
   - port: 8080
