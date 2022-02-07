@@ -1,6 +1,6 @@
 tasks:
-  - init: mvn install spring-boot:start spring-boot:stop
-    command: mvn
+  - command: sdk install java 17.0.2-open
+  - command: mvn install spring-boot:start spring-boot:stop
 
 ports:
   - port: 8080
