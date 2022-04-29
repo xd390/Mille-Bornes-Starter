@@ -1,0 +1,54 @@
+/*.login-rich-content {
+    background-image: url("../../../src/main/resources/META-INF/resources/Images/MilleBorne.png");
+    background-position: center;
+    background-size: cover;
+    display: flex;
+    height: 500px;
+}
+.login-rich-content vaadin-login-form {
+    align-items: center;
+    display: flex;
+    max-width: 300px;
+}
+.login-rich-content vaadin-login-form-wrapper {
+    background-image: none;
+}*/
+body{
+    background-image:url("./Images/MilleBorne.png");
+}
+.footer {
+    text-align:center;
+    position: fixed;
+    bottom:0;
+    width:100%;
+    display:inline-block;
+    margin-block: 25px 10px;
+    font-size:13px;
+}
+.padded_img {
+    padding-left: 2em;
+    padding-right: 2em;
+}
+
+.container{
+    position:fixed;
+    padding:0;
+    margin:0;
+
+    top:0;
+    left:0;
+
+    width: 100%;
+    height: 100%;
+    background:rgba(255,255,255,0.5);
+}
+.rect {
+    border: 3px solid #E3E3E3;
+    width: 200px;
+    height: 300px;
+    display:inline-block;
+    position:relative;
+    padding-left: 3em;
+    padding-right: 3em;
+}
+
