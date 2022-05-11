@@ -1,22 +1,21 @@
 package nc.unc.gl.borne.modele;
 
+import nc.unc.gl.borne.services.JoueurService;
 import java.util.ArrayList;
 
 public class Joueur {
 
-    private String pseudo;
-    private int points = 0;
+    public String pseudo;
+    public int points = 0;
 
     public ArrayList<Carte> main;
-    private ArrayList<Carte> immunites;
+    public ArrayList<Carte> immunites;
 
-    private boolean demarre;
-    private Carte attaque;
-    private Carte vitesse;
+    public boolean demarre;
+    public Carte attaque;
+    public Carte vitesse;
 
 
-    private Integer equipe;
-    private boolean attacked = false;
 
     public Joueur( String pseudo) {
 
@@ -60,6 +59,15 @@ public class Joueur {
     }
     public void setMain(ArrayList<Carte> main) {
         this.main = main;
+    }
+    public void setDemarre(boolean demarre) {
+        this.demarre = demarre;
+    }
+    public void setAttaque(Carte attaque) {
+        this.attaque = attaque;
+    }
+    public void setVitesse(Carte vitesse) {
+        this.vitesse = vitesse;
     }
     public void setImmunites(ArrayList<Carte> immunites) {
         this.immunites = immunites;

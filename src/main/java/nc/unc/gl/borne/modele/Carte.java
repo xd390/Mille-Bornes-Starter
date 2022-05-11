@@ -5,7 +5,7 @@ public class Carte{
         { "attaque", "feu rouge", "limite de vitesse", "panne d'essence", "crevaison", "accident" },
         { "parade", "feu vert", "fin de limite de vitesse", "essence", "roue de secours", "reparations" },
         { "botte", "prioritaire", "prioritaire", "citerne", "increvable", "as du volant" },
-        { "etape", "25", "50", "75", "100", "200" } };
+        { "borne", "25", "50", "75", "100", "200" } };
 
     private int type;
     private int effet;

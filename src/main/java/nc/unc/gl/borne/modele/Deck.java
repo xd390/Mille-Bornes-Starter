@@ -4,7 +4,7 @@ import java.util.Stack;
 public class Deck  extends Stack<Carte>{
 
     public Deck() {
-        super();
+
     }
 
 }

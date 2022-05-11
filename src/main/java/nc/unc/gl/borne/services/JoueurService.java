@@ -7,97 +7,50 @@ import nc.unc.gl.borne.modele.Joueur;
 import java.util.ArrayList;
 
 public class JoueurService {
-    private String pseudo;
-    private int points = 0;
 
-    public ArrayList<Carte> main;
-    private ArrayList<Carte> immunites;
-
-    private boolean demarre;
-    private Carte attaque;
-    private Carte vitesse;
-
-
-    private Integer equipe;
-    private boolean attacked = false;
-
-    public JoueurService( String pseudo) {
-
-        this.pseudo = pseudo;
-        this.points = 0;
-        this.main = new ArrayList<Carte>();
-        this.immunites = new ArrayList<Carte>();
-        this.demarre=false;
-        this.attaque = null;
-        this.vitesse = null;
-    }
-
-
-    public void piocherCarte(Deck pioche) {
-        this.main.add((Carte) pioche.pop());
+    public static void piocherCarte(Deck pioche,Joueur joueur) {
+        joueur.main.add((Carte) pioche.pop());
 
     }
 
 
-    public void defausserCarte(Carte carte) {
-        this.main.remove(carte);
+    public void defausserCarte(Carte carte,Joueur joueur) {
+        joueur.main.remove(carte);
     }
 
+    public void poserBorne(Carte carteBorne, Joueur joueur) {
+        int bornes = carteBorne.getEffet();
+        bornes = Integer.parseInt(Carte.getEffets()[3][bornes]);
+        joueur.points += bornes;
+        joueur.main.remove(carteBorne);
 
-
-
-
-
-
-    public String getPseudo() {
-        return pseudo;
-    }
-    public int getPoints() {
-
-        return points;
-    }
-    public ArrayList<Carte> getMain() {
-        return main;
-    }
-    public ArrayList<Carte> getImmunites() {
-        return immunites;
-    }
-    public boolean isDemarre() {
-        return demarre;
-    }
-    public Carte getAttaque() {
-        return attaque;
-    }
-    public Carte getVitesse() {
-        return vitesse;
     }
 
-    public void setPseudo(String pseudo){
-        this.pseudo = pseudo;
-    }
-    public void setPoints(int points){
-        this.points = points;
-    }
-    public void setMain(ArrayList<Carte> main) {
-        this.main = main;
-    }
-    public void setImmunites(ArrayList<Carte> immunites) {
-        this.immunites = immunites;
-    }
-    public String toString() {
-        return "Joueur [pseudo=" + pseudo + ", points=" + points + ", main=" + main
-            + ", demarre=" + demarre + ", attaque=" + attaque
-            + ", vitesse=" + vitesse + ", immunites=" + immunites + "]";
+    public void attaquer(Carte carteAttaque, Joueur joueur , Joueur joueurAttaqué) {
+        joueurAttaqué.setAttaque(carteAttaque);
+        joueur.main.remove(carteAttaque);
     }
 
+    public void poserFinLimite(Carte carteParade,Joueur joueur) {
+        joueur.vitesse = null;
+        joueur.main.remove(carteParade);
 
+    }
+    public void poserBotte(Carte botte,Joueur joueur) {
+        joueur.immunites.add(botte);
+        joueur.main.remove(botte);
+    }
 
+    public void poserParade(Carte carteParade,Joueur joueur) {
+        if (joueur.isDemarre() == false && carteParade.getEffet() == 1) {
+            joueur.setDemarre(true);
+        }
+        else {
+            joueur.setAttaque(null);
+            joueur.main.remove(carteParade);
+        }
 
-
-
-
-
-
+    }
 
 
 }
