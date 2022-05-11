@@ -9,10 +9,11 @@ public class Carte{
 
     private int type;
     private int effet;
-
-    public Carte(int type, int effet) {
+    private String imageNom;
+    public Carte(int type, int effet, String imageNom) {
         this.type = type;
         this.effet = effet;
+        this.imageNom = imageNom;
     }
 
     public Carte() {
@@ -47,5 +48,13 @@ public class Carte{
     @Override
     public String toString() {
         return "[" + Carte.getEffets()[this.type][effet] + "]";
+    }
+
+    public String getImageNom() {
+        return imageNom;
+    }
+
+    public void setImageNom(String imageNom) {
+        this.imageNom = imageNom;
     }
 }
