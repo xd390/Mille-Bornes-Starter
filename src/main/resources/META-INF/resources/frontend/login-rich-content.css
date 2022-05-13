@@ -35,17 +35,31 @@
 }
 .rectangle {
     border:3px solid darkgray;
-    width: 50%;
-    height: auto;
+    width: 10%;
+    height: 200px;
     margin: 3em;
     display:inline-block;
     position:relative;
 
 }
+
+
 .space_between_img {
     padding-left: 2em;
     padding-right: 2em;
+
 }
+
+.size_of_card_player{
+    width: 10%;
+    height: 15% ;
+}
+
+.size_of_card_right_player{
+    width: 5%;
+    height: 10%;
+}
+
 .cardPlayer{
     width: 5%;
 }
@@ -65,7 +79,12 @@
     width: 5%;
 }
 
-
+#piocheCarte{
+    position: absolute;
+    left: 5%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
 
 
 

@@ -31,6 +31,7 @@ public class CardComponent extends Div implements DragSource<CardComponent>, Has
                 // Joue la carte
             }
         });
+
     }
 
     public Carte getCarte() {
