@@ -22,10 +22,22 @@ public class CarteService {
                             .getEffet()){
                             isImmune=true;
                         }
+                        if (joueurCibler.getImmunites().get(i).getEffet()==2 && carteajouer
+                            .getEffet()==1){
+                            isImmune=true;
+                        }
+                        if (joueurCibler.getImmunites().get(i).getEffet()==1 && carteajouer
+                            .getEffet()==2){
+                            isImmune=true;
+                        }
                 }
 
                 }
-                if(joueurCibler.getAttaque() == null && joueurCibler.isDemarre()==true && isImmune==false) {
+                if (carteajouer.getEffet()==2 && joueurCibler.getVitesse()==null && isImmune==false){
+                    possible = true;
+                    JoueurService.poserLimiteVitesse(carteajouer, joueur, joueurCibler);
+                }
+                else if(joueurCibler.getAttaque() == null && joueurCibler.isDemarre()==true && isImmune==false) {
                     possible = true;
                     JoueurService.attaquer(carteajouer, joueur, joueurCibler);
                 }
@@ -62,6 +74,9 @@ public class CarteService {
                         possible = true;
                         JoueurService.poserFinLimite(carteajouer, joueur);
                     }
+                    else{
+                        System.out.println("Votre carte parade ne correspond pas a l'attaque recue ");
+                    }
                 } else
                     System.out.println("Vous n'avez pas été attaqué !");
 
@@ -75,6 +90,9 @@ public class CarteService {
                 possible = true;
                 JoueurService.poserBotte(carteajouer, joueur);
 
+                if (joueur.isDemarre() == false && carteajouer.getEffet() == 1 || carteajouer.getEffet() == 2){
+                    joueur.setDemarre(true);
+                }
 
                 if (joueur.getAttaque() !=null && joueur.getAttaque().getEffet()==carteajouer.getEffet()) {
                     joueur.setAttaque(null);
@@ -91,7 +109,7 @@ public class CarteService {
                     if (joueur.getAttaque() == null) {
                         // Vérification de la limite de vitesse.
                         if (joueur.getVitesse() != null) {
-                            if ((int) carteajouer.getEffet() <= 50) {
+                            if (carteajouer.getEffet() <3) {
                                 possible = true;
                                 JoueurService.poserBorne(carteajouer,joueur);
                             } else

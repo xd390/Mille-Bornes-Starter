@@ -79,6 +79,16 @@ public class Joueur {
     }
 
 
+    public void ecrireMain() {
+        System.out.print("Contenu de la main: [ ");
+        int i = 0;
+        for (i = 0; i < this.getMain().size() - 1; i++) {
+            System.out.print("Carte n°" + i + " : " + this.getMain().get(i)
+                + ", ");
+        }
+        System.out
+            .println("Carte n°" + i + " : " + this.getMain().get(i) + " ]");
+    }
 
 
 

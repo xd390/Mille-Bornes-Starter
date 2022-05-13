@@ -31,6 +31,11 @@ public class JoueurService {
         joueur.main.remove(carteAttaque);
     }
 
+    public void poserLimiteVitesse(Carte carteAttaque, Joueur joueur , Joueur joueurAttaqué) {
+        joueurAttaqué.setVitesse(carteAttaque);
+        joueur.main.remove(carteAttaque);
+    }
+
     public void poserFinLimite(Carte carteParade,Joueur joueur) {
         joueur.vitesse = null;
         joueur.main.remove(carteParade);
@@ -51,6 +56,7 @@ public class JoueurService {
         }
 
     }
+
 
 
 }
