@@ -19,21 +19,23 @@ public class CardContainerComponent extends Div implements DropTarget<CardCompon
         // TODO enlever les commentaires devant. private Joueur joueur;
         public CardContainerComponent(int type, int effet, String nameContainer, Boolean carteSpecifique){
             this.carteSpecifique = carteSpecifique;
+            this.setActive(true);
             this.type = type;
             this.effet = effet;
             this.addClassName("rectangle");
             this.setText(nameContainer);
             this.setDropEffect(DropEffect.MOVE);
             this.addDropListener(e ->{
+                Notification.show("tentative de pose carte");
                 if(e.getDropEffect() == DropEffect.MOVE) {
                     e.getDragData().ifPresent(data -> {
                         // the server side drag data is available if it has been set and the
                         // component was dragged from the same UI as the drop target
-                        CardComponent res = (CardComponent) data;
-                        Carte carte = res.getCarte();
-                        if(type == carte.getType() && effet == carte.getEffet() | carteSpecifique && type == carte.getType()){
-                            cartes.add(res);
-                            e.getComponent().add(res);
+                        Carte res = (Carte) data;
+                        if(type == res.getType() && effet == res.getEffet() | carteSpecifique && type == res.getType()){
+                            CardComponent res2 = (CardComponent) e.getDragSourceComponent().get();
+                            res2.removeClassName("size_of_card_player");
+                            this.add(e.getDragSourceComponent().get());
                             // TODO appeler le service et faire jouer la carte
                         }
                         else{

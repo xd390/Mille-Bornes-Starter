@@ -1,27 +1,15 @@
 package nc.unc.gl.borne;
-import com.vaadin.flow.component.Component;
-import com.vaadin.flow.component.Html;
+
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.dependency.StyleSheet;
-import com.vaadin.flow.component.dnd.DragSource;
-import com.vaadin.flow.component.dnd.DropEffect;
-import com.vaadin.flow.component.dnd.DropTarget;
-import com.vaadin.flow.component.dnd.EffectAllowed;
 import com.vaadin.flow.component.html.Div;
-import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.html.Image;
-import com.vaadin.flow.component.login.LoginI18n;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
-import com.vaadin.flow.component.orderedlayout.VerticalLayout;
-import com.vaadin.flow.component.textfield.TextField;
-import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import nc.unc.gl.borne.gui.component.CardComponent;
 import nc.unc.gl.borne.gui.component.CardContainerComponent;
-
-import com.vaadin.flow.component.notification.Notification;
 import nc.unc.gl.borne.gui.component.PlayerComponent;
-import nc.unc.gl.borne.modele.Deck;
+import nc.unc.gl.borne.modele.Carte;
 import nc.unc.gl.borne.modele.Joueur;
 
 @Route("plateau")
@@ -73,18 +61,9 @@ public class Plateau extends HorizontalLayout {
         imgJoueurMalus.addClassName("size_of_card_right_player");
         imgJoueurBot.addClassName("size_of_card_right_player");
 
-        img.addClassName("space_between_img");
-        img2.addClassName("space_between_img");
-        img3.addClassName("space_between_img");
-        img4.addClassName("space_between_img");
-
-        img.addClassName("size_of_card_player");
-        img2.addClassName("size_of_card_player");
-        img3.addClassName("size_of_card_player");
-        img4.addClassName("size_of_card_player");
-
-        cartes.add(img,img2,img3,img4);
-
+        Carte carte1 = new Carte(3,1,"borne_25.jpeg");
+        CardComponent carteComponent1 = new CardComponent(carte1);
+        cartes.add(carteComponent1);
         cartes.addClassName("footer");
 
         carteJoueur.add(imgJoueur);
