@@ -34,8 +34,8 @@ public class CardContainerComponent extends Div implements DropTarget<CardCompon
                         Carte res = (Carte) data;
                         if(type == res.getType() && effet == res.getEffet() | carteSpecifique && type == res.getType()){
                             CardComponent res2 = (CardComponent) e.getDragSourceComponent().get();
-                            res2.removeClassName("size_of_card_player");
-                            this.add(e.getDragSourceComponent().get());
+                            res2.getImage().removeClassName("size_of_card_player");
+                            this.add(res2.getImage());
                             // TODO appeler le service et faire jouer la carte
                         }
                         else{

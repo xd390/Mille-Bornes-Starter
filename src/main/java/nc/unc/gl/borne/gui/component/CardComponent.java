@@ -31,6 +31,10 @@ public class CardComponent extends Div implements DragSource<CardComponent>, Has
 
     }
 
+    public Image getImage() {
+        return image;
+    }
+
     public Carte getCarte() {
         return carte;
     }
