@@ -20,17 +20,19 @@ public class CardComponent extends Div implements DragSource<CardComponent>, Has
         this.setDraggable(true);
         this.setDragData(carte);
         this.image.setSrc(carte.getImageNom());
+        this.image.addClassName("space_between_img");
+        this.image.addClassName("size_of_card_player");
         this.add(image);
         this.setEffectAllowed(EffectAllowed.MOVE);
         this.addDragStartListener(e ->
             Notification.show("Vous avez selectionner une carte")
         );
         this.addClassName("Carte-main");
-        this.addDragEndListener(e -> {
-            if(e.isSuccessful()){
-                // Joue la carte
-            }
-        });
+
+    }
+
+    public Image getImage() {
+        return image;
     }
 
     public Carte getCarte() {
