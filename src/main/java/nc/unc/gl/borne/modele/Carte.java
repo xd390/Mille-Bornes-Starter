@@ -9,11 +9,11 @@ public class Carte{
 
     private int type;
     private int effet;
-    private String imageNom;
+    private String imagePath;
     public Carte(int type, int effet, String imageNom) {
         this.type = type;
         this.effet = effet;
-        this.imageNom = imageNom;
+        this.imagePath = "/cartes/"+imageNom;
     }
 
     public Carte() {
@@ -51,10 +51,7 @@ public class Carte{
     }
 
     public String getImageNom() {
-        return imageNom;
+        return imagePath;
     }
 
-    public void setImageNom(String imageNom) {
-        this.imageNom = imageNom;
-    }
 }

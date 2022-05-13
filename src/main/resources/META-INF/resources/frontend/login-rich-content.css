@@ -30,12 +30,13 @@
 .playerRight{
     float: right;
     height:100% ;
+    width: 10%;
 
 }
 .rectangle {
     border:3px solid darkgray;
-    width: 150px;
-    height: 250px;
+    width: 50%;
+    height: auto;
     margin: 3em;
     display:inline-block;
     position:relative;
@@ -46,24 +47,22 @@
     padding-right: 2em;
 }
 .cardPlayer{
-    position: absolute;
-    left: 95%;
-    top: 20%;
-    transform: translate(-50%, -50%);
+    width: 5%;
+}
+.v-dragged.card {
+    outline: 1px dotted hotpink;
+    opacity: 0.5;
+}
+.v-drag-over-target.card {
+    outline: 1px solid lightgreen;
 }
 
 .cardPlayerMalus{
-    position: absolute;
-    left: 95%;
-    top: 50%;
-    transform: translate(-50%, -50%);
+    width: 5%;
 }
 
 .cardPlayerBot{
-    position: absolute;
-    left: 95%;
-    top: 80%;
-    transform: translate(-50%, -50%);
+    width: 5%;
 }
 
 
