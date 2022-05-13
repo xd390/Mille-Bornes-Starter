@@ -1,7 +1,12 @@
 package nc.unc.gl.borne;
+import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.Html;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.dependency.StyleSheet;
+import com.vaadin.flow.component.dnd.DragSource;
+import com.vaadin.flow.component.dnd.DropEffect;
+import com.vaadin.flow.component.dnd.DropTarget;
+import com.vaadin.flow.component.dnd.EffectAllowed;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.html.Image;
@@ -11,6 +16,9 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
+
+import com.vaadin.flow.component.notification.Notification;
+import nc.unc.gl.borne.modele.Deck;
 
 @Route("plateau")
 @StyleSheet("frontend/login-rich-content.css")
@@ -53,6 +61,29 @@ public class Plateau extends HorizontalLayout {
         r5.addClassName("rectangle");
 
 
+        DropTarget<Div> dropTarget1 = DropTarget.create(r1);
+        dropTarget1.setDropEffect(DropEffect.MOVE);
+        dropTarget1.addDropListener(event -> {
+            Notification.show(String.valueOf(event.getDropEffect()));
+            // move the dragged component to inside the drop target component
+            if (event.getDropEffect() == DropEffect.MOVE) {
+                // the drag source is available only if the dragged component is from
+                // the same UI as the drop target
+                event.getDragSourceComponent().ifPresent(r1::add);
+
+                event.getDragData().ifPresent(data -> {
+                    // the server side drag data is available if it has been set and the
+                    // component was dragged from the same UI as the drop target
+                    var res  = (Image) data;
+                    Notification.show(res.getSrc());
+
+                });
+            }
+        });
+        DropTarget<Div> dropTarget2 = DropTarget.create(r2);
+        DropTarget<Div> dropTarget3 = DropTarget.create(r3);
+        DropTarget<Div> dropTarget4 = DropTarget.create(r4);
+        DropTarget<Div> dropTarget5 = DropTarget.create(r5);
 
         Image img = new Image("/cartes/attaque_vitesse.jpeg","carte");
         Image img2 = new Image("/cartes/attaque_feu.jpeg","carte");
@@ -69,7 +100,25 @@ public class Plateau extends HorizontalLayout {
         img3.addClassName("space_between_img");
         img4.addClassName("space_between_img");
         cartes.addClassName("footer");
-        cartes.add(img,img2,img3,img4);
+
+        Div carte1 = new Div();
+        carte1.add(img);
+        Div carte2 = new Div();
+        carte2.add(img2);
+        Div carte3 = new Div();
+        carte2.add(img3);
+        Div carte4 = new Div();
+        carte2.add(img4);
+        DragSource<Image> carte1Draggable = DragSource.create(img);
+        carte1Draggable.addDragStartListener(e -> {
+            Notification.show("Vous avez sélectionner une carte");
+        });
+        carte1Draggable.addDragEndListener(e -> {
+           e.clearDragData();
+        });
+        carte1Draggable.setDragData(carte1);
+        carte1Draggable.setEffectAllowed(EffectAllowed.MOVE);
+        cartes.add(carte1,carte2,carte3,carte4);
 
         carteJoueur.add(imgJoueur);
         carteMalus.add(imgJoueurMalus);

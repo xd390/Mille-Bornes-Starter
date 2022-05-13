@@ -12,7 +12,11 @@ import java.util.List;
 public class CardContainerComponent extends Div implements DropTarget<CardComponent>, HasStyle {
         public List<CardComponent> cartes = new ArrayList<>();
         public int type;
-        public CardContainerComponent(int type, String nameContainer){
+        private int effet;
+        public CardContainerComponent(int type, int effet, String nameContainer){
+            this.type = type;
+            this.effet = effet;
+            this.setTitle(nameContainer);
             this.setDropEffect(DropEffect.MOVE);
             this.addDropListener(e ->{
                 if(e.getDropEffect() == DropEffect.MOVE) {
