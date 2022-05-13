@@ -14,7 +14,12 @@ public class PlayerComponent extends Div implements HasStyle {
         this.joueur = joueur;
         dernièreCarteJouer = new Div();
         malus = new CardContainerComponent(0, 0, "Malus",false);
+        malus.addClassName("cardPlayerMalus");
+        malus.removeClassName("rectangle");
         bottes = new Div();
+        bottes.addClassName("cardPlayerBot");
+
+        add(dernièreCarteJouer,malus,bottes);
     }
 
     public Div getBottes() {

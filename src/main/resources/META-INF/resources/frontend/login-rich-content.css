@@ -37,6 +37,8 @@
     border:3px solid darkgray;
     width: 10%;
     height: 200px;
+    text-align: center;
+    color: rgba(0, 0, 0, 0.3);
     margin: 3em;
     display:inline-block;
     position:relative;
@@ -56,8 +58,8 @@
 }
 
 .size_of_card_right_player{
-    width: 5%;
-    height: 10%;
+    width: 1000%;
+    height: 1000%;
 }
 
 .cardPlayer{

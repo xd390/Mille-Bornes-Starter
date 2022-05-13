@@ -20,20 +20,22 @@ import nc.unc.gl.borne.gui.component.CardComponent;
 import nc.unc.gl.borne.gui.component.CardContainerComponent;
 
 import com.vaadin.flow.component.notification.Notification;
+import nc.unc.gl.borne.gui.component.PlayerComponent;
 import nc.unc.gl.borne.modele.Deck;
+import nc.unc.gl.borne.modele.Joueur;
 
 @Route("plateau")
 @StyleSheet("frontend/login-rich-content.css")
 public class Plateau extends HorizontalLayout {
     public Plateau(){
 
+        Joueur joueur2=new Joueur("toto");
         CardComponent cartes=new CardComponent();
-        CardComponent containerPoseCarte=new CardComponent();
-        CardComponent joueurDroite=new CardComponent();
+        Div containerPoseCarte=new Div();
+        Div joueurDroite=new Div();
         CardComponent carteJoueur=new CardComponent();
-        CardComponent carteMalus=new CardComponent();
-        CardComponent carteBot=new CardComponent();
-        CardComponent piocheCarte=new CardComponent();
+        PlayerComponent playerComponent=new PlayerComponent(joueur2);
+        Div piocheCarte=new Div();
 
         Div container=new Div();
         Div informationJoueur=new Div();
@@ -42,9 +44,6 @@ public class Plateau extends HorizontalLayout {
         containerPoseCarte.addClassName("containerDepotCarte");
         joueurDroite.addClassName("playerRight");
         carteJoueur.addClassName("cardPlayer");
-        carteMalus.addClassName("cardPlayerMalus");
-        carteBot.addClassName("cardPlayerBot");
-
 
         informationJoueur.setId("infoJoueur");
         piocheCarte.setId("piocheCarte");
@@ -53,13 +52,11 @@ public class Plateau extends HorizontalLayout {
 
         container.add( containerPoseCarte,joueurDroite);
 
-        CardContainerComponent r1 = new CardContainerComponent(3,1,"carte-25",false);
-        CardContainerComponent r2 = new CardContainerComponent(3,2,"carte-50",false);
-        CardContainerComponent r3 = new CardContainerComponent(3,3,"carte-75",false);
-        CardContainerComponent r4 = new CardContainerComponent(3,4,"carte-100",false);
-        CardContainerComponent r5 = new CardContainerComponent(3,5,"carte-200",false);
-
-
+        CardContainerComponent r1 = new CardContainerComponent(3,1,"25",false);
+        CardContainerComponent r2 = new CardContainerComponent(3,2,"50",false);
+        CardContainerComponent r3 = new CardContainerComponent(3,3,"75",false);
+        CardContainerComponent r4 = new CardContainerComponent(3,4,"100",false);
+        CardContainerComponent r5 = new CardContainerComponent(3,5,"200",false);
 
         Button buttonPioche = new Button("Pioche");
 
@@ -76,7 +73,6 @@ public class Plateau extends HorizontalLayout {
         imgJoueurMalus.addClassName("size_of_card_right_player");
         imgJoueurBot.addClassName("size_of_card_right_player");
 
-
         img.addClassName("space_between_img");
         img2.addClassName("space_between_img");
         img3.addClassName("space_between_img");
@@ -91,16 +87,14 @@ public class Plateau extends HorizontalLayout {
 
         cartes.addClassName("footer");
 
-
         carteJoueur.add(imgJoueur);
-        carteMalus.add(imgJoueurMalus);
-        carteBot.add(imgJoueurBot);
+        playerComponent.getMalus().add(imgJoueurMalus);
+        playerComponent.getBottes().add(imgJoueurBot);
         piocheCarte.add(buttonPioche);
 
         joueurDroite.add(informationJoueur);
         joueurDroite.add(carteJoueur);
-        joueurDroite.add(carteMalus);
-        joueurDroite.add(carteBot);
+        joueurDroite.add(playerComponent);
 
         containerPoseCarte.add(r1,r2,r3,r4,r5);
 

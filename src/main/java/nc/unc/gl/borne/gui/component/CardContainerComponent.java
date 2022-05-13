@@ -22,7 +22,7 @@ public class CardContainerComponent extends Div implements DropTarget<CardCompon
             this.type = type;
             this.effet = effet;
             this.addClassName("rectangle");
-            this.setTitle(nameContainer);
+            this.setText(nameContainer);
             this.setDropEffect(DropEffect.MOVE);
             this.addDropListener(e ->{
                 if(e.getDropEffect() == DropEffect.MOVE) {
