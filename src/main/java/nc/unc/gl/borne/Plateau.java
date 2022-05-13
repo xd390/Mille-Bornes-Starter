@@ -53,17 +53,12 @@ public class Plateau extends HorizontalLayout {
 
         container.add( containerPoseCarte,joueurDroite);
 
-        CardContainerComponent r1 = new CardContainerComponent(3,1,"carte-25");
-        CardContainerComponent r2 = new CardContainerComponent(3,2,"carte-50");
-        CardContainerComponent r3 = new CardContainerComponent(3,3,"carte-75");
-        CardContainerComponent r4 = new CardContainerComponent(3,4,"carte-100");
-        CardContainerComponent r5 = new CardContainerComponent(3,5,"carte-200");
+        CardContainerComponent r1 = new CardContainerComponent(3,1,"carte-25",false);
+        CardContainerComponent r2 = new CardContainerComponent(3,2,"carte-50",false);
+        CardContainerComponent r3 = new CardContainerComponent(3,3,"carte-75",false);
+        CardContainerComponent r4 = new CardContainerComponent(3,4,"carte-100",false);
+        CardContainerComponent r5 = new CardContainerComponent(3,5,"carte-200",false);
 
-        r1.addClassName("rectangle");
-        r2.addClassName("rectangle");
-        r3.addClassName("rectangle");
-        r4.addClassName("rectangle");
-        r5.addClassName("rectangle");
 
 
         Button buttonPioche = new Button("Pioche");
