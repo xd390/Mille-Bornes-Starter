@@ -41,10 +41,6 @@ public class ObserverService {
         return ui.getCurrent();
     }
 
-    public int getNumJoueur() {
-        return this.joueur.getNumJoueur();
-    }
-
     public static Joueur getJoueur(String key) {
         return sessions.get(key);
     }
