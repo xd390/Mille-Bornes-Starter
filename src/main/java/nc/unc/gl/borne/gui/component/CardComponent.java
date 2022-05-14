@@ -27,7 +27,7 @@ public class CardComponent extends Div implements DragSource<CardComponent>, Has
         this.addDragStartListener(e ->
             Notification.show("Vous avez selectionner une carte")
         );
-        this.addClassName("Carte-main");
+        this.addClassName("div_card_player");
 
     }
 

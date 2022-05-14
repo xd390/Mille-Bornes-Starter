@@ -15,6 +15,7 @@ public class CardContainerComponent extends Div implements DropTarget<CardCompon
         public List<CardComponent> cartes = new ArrayList<>();
         private int type;
         private int effet;
+        private int cpt=0;
         private boolean carteSpecifique;
         // TODO enlever les commentaires devant. private Joueur joueur;
         public CardContainerComponent(int type, int effet, String nameContainer, Boolean carteSpecifique){
@@ -23,7 +24,7 @@ public class CardContainerComponent extends Div implements DropTarget<CardCompon
             this.type = type;
             this.effet = effet;
             this.addClassName("rectangle");
-            this.setText(nameContainer);
+            //this.setText(nameContainer);
             this.setDropEffect(DropEffect.MOVE);
             this.addDropListener(e ->{
                 Notification.show("tentative de pose carte");
@@ -35,7 +36,14 @@ public class CardContainerComponent extends Div implements DropTarget<CardCompon
                         if(type == res.getType() && effet == res.getEffet() | carteSpecifique && type == res.getType()){
                             CardComponent res2 = (CardComponent) e.getDragSourceComponent().get();
                             res2.getImage().removeClassName("size_of_card_player");
+                            res2.getImage().removeClassName("space_between_img");
+                            res2.getImage().addClassName("size_of_depository_card");
+                            res2.getImage().addClassName("superpose_card");
+                            res2.getImage().setId("img_"+cpt);
+                            cpt++;
                             this.add(res2.getImage());
+                            this.removeClassName("rectangle");
+                            this.addClassName("container_with_card");
                             // TODO appeler le service et faire jouer la carte
                         }
                         else{
