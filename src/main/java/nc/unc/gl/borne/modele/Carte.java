@@ -22,6 +22,7 @@ public class Carte{
         this.imagePath = "/cartes/"+effetsImageNom[type][effet];
     }
 
+
     public Carte() {
         this.type = 0;
         this.effet = 0;

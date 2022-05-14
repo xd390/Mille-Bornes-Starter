@@ -13,7 +13,6 @@ public class JoueurService {
 
     }
 
-
     public void defausserCarte(Carte carte,Joueur joueur) {
         joueur.main.remove(carte);
     }

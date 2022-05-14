@@ -43,8 +43,6 @@ public class CarteService {
                 }
                 else{
                     System.out.println("joueurCibler n'est pas attaquable.");
-
-
                 }
                 break;
 
