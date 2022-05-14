@@ -9,7 +9,6 @@ public class Joueur {
 
     public boolean peutJouer = false;
 
-    public int numJoueur;
     public int points = 0;
 
     public ArrayList<Carte> main;
@@ -24,7 +23,6 @@ public class Joueur {
     public Joueur( String pseudo) {
 
         this.pseudo = pseudo;
-        this.numJoueur = 0;
         this.points = 0;
         this.main = new ArrayList<Carte>();
         this.immunites = new ArrayList<Carte>();
@@ -32,11 +30,6 @@ public class Joueur {
         this.attaque = null;
         this.vitesse = null;
     }
-
-    public void setNumJoueur(int num) {
-        this.numJoueur = num;
-    }
-    public int getNumJoueur() {return this.numJoueur;}
 
     public String getPseudo() {
         return pseudo;
