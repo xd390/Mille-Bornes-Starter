@@ -61,7 +61,7 @@ public class Plateau extends HorizontalLayout {
         imgJoueurMalus.addClassName("size_of_card_right_player");
         imgJoueurBot.addClassName("size_of_card_right_player");
 
-        Carte carte1 = new Carte(3,1,"borne_25.jpeg");
+        Carte carte1 = new Carte(3,1);
         CardComponent carteComponent1 = new CardComponent(carte1);
         cartes.add(carteComponent1);
         cartes.addClassName("footer");

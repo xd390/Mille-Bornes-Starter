@@ -56,10 +56,13 @@ public class MilleBornesTests {
         Carte carte13 = new Carte(1,4);
         //essence
         Carte carte14 = new Carte(1,3);
+        //borne 200
+        Carte carte15 = new Carte(3,5);
 
         Joueur joueur1= new Joueur("Omni");
         Joueur joueur2= new Joueur("tony");
         Joueur joueur3= new Joueur("flo");
+        Joueur joueur4= new Joueur("Julien");
         Deck laPioche = new Deck();
 
         System.out.println(carte.toString());
@@ -133,6 +136,31 @@ public class MilleBornesTests {
         //On utilise une fin de limite de vitesse
         carteService.jouerCarte(carte4,joueur3,joueur1);
         System.out.println(joueur3.toString());
+
+        System.out.println("---Joueur 4---");
+        //On met un feu vert et on tente de dépassé les 1000bornes
+        carteService.jouerCarte(carte,joueur4,joueur2);
+        carteService.jouerCarte(carte15,joueur4,joueur2);
+        System.out.println(joueur4.toString());
+        carteService.jouerCarte(carte15,joueur4,joueur2);
+        System.out.println(joueur4.toString());
+        carteService.jouerCarte(carte15,joueur4,joueur2);
+        System.out.println(joueur4.toString());
+        carteService.jouerCarte(carte15,joueur4,joueur2);
+        System.out.println(joueur4.toString());
+        carteService.jouerCarte(carte12,joueur4,joueur2);
+        System.out.println(joueur4.toString());
+        carteService.jouerCarte(carte15,joueur4,joueur2);
+        System.out.println(joueur4.toString());
+        carteService.jouerCarte(carte12,joueur4,joueur2);
+        System.out.println(joueur4.toString());
+        carteService.jouerCarte(carte2,joueur4,joueur2);
+        System.out.println(joueur4.toString());
+        carteService.jouerCarte(carte3,joueur4,joueur2);
+        System.out.println(joueur4.toString());
+        carteService.jouerCarte(carte2,joueur4,joueur2);
+        System.out.println(joueur4.toString());
+
 
         //On initialise un deck qui créer 106 cartes et les mélanges
         deckService.initialiserDeck(laPioche);

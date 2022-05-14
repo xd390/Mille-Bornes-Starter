@@ -114,7 +114,7 @@ public class CarteService {
                                 JoueurService.poserBorne(carteajouer,joueur);
                             } else
                                 System.out.println("Vous êtes limité à 50.");
-                        } else if (joueur.getPoints() + (int) carteajouer.getEffet() > 1000)
+                        } else if (joueur.getPoints() + Integer.parseInt(Carte.getEffets()[3][carteajouer.getEffet()]) > 1000)
                             System.out.println("Vous ne pouvez pas dépasser mille bornes !");
                         else {
                             possible = true;
