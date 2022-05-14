@@ -8,6 +8,15 @@ import java.util.ArrayList;
 
 public class JoueurService {
 
+    public static String nomJoueur;
+
+    public static void setNomJoueur(String nom){
+        nomJoueur = nom;
+    }
+    public static String getNomJoueur(){
+        return nomJoueur;
+    }
+
     public static void piocherCarte(Deck pioche,Joueur joueur) {
         joueur.main.add((Carte) pioche.pop());
 

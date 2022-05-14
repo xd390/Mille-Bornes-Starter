@@ -7,6 +7,8 @@ public class Joueur {
 
     public String pseudo;
 
+    public boolean peutJouer = false;
+
     public int numJoueur;
     public int points = 0;
 

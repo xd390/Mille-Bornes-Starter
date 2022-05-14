@@ -7,7 +7,6 @@ import nc.unc.gl.borne.modele.Joueur;
 import nc.unc.gl.borne.services.CarteService;
 import nc.unc.gl.borne.services.DeckService;
 import nc.unc.gl.borne.services.JoueurService;
-import nc.unc.gl.borne.services.PartieService;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.ApplicationContext;
@@ -24,7 +23,6 @@ public class MilleBornesTests {
         DeckService deckService = new DeckService();
         CarteService carteService = new CarteService();
         JoueurService joueurService = new JoueurService();
-        PartieService partieService = new PartieService();
 
         //feu vert
         Carte carte = new Carte(1,1);
@@ -166,7 +164,7 @@ public class MilleBornesTests {
         deckService.initialiserDeck(laPioche);
         System.out.println(laPioche.size());
         //On distribue 6cartes a 2joueurs
-        partieService.distribuerMain(laPioche,joueur1,joueur2);
+        deckService.distribuerMain(laPioche,joueur1,joueur2);
         //On affiche les mains
         joueur1.ecrireMain();
         joueur2.ecrireMain();

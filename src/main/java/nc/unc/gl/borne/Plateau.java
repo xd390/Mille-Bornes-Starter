@@ -1,6 +1,7 @@
 package nc.unc.gl.borne;
 
 import com.vaadin.flow.component.HtmlContainer;
+import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.dependency.StyleSheet;
 import com.vaadin.flow.component.html.Div;
@@ -13,6 +14,8 @@ import nc.unc.gl.borne.gui.component.CardContainerComponent;
 import nc.unc.gl.borne.gui.component.PlayerComponent;
 import nc.unc.gl.borne.modele.Carte;
 import nc.unc.gl.borne.modele.Joueur;
+import nc.unc.gl.borne.services.JoueurService;
+import nc.unc.gl.borne.services.ObserverService;
 
 @Route("plateau")
 @StyleSheet("frontend/login-rich-content.css")
@@ -20,9 +23,10 @@ public class Plateau extends VerticalLayout {
         private final HorizontalLayout playerLeft;
         private final HorizontalLayout middleZone;
         private final HorizontalLayout footerZone;
+
     public Plateau() {
-
-
+        Joueur joueur1 = ObserverService.getJoueur(JoueurService.getNomJoueur());
+        Joueur joueur2 = ObserverService.getAutreJoueur(JoueurService.getNomJoueur());
 
         middleZone = new HorizontalLayout();
         CardContainerComponent r1 = new CardContainerComponent(3,1,"25",false);
@@ -44,8 +48,8 @@ public class Plateau extends VerticalLayout {
         imgJoueurMalus.addClassName("size_of_card_right_player");
         imgJoueurBot.addClassName("size_of_card_right_player");
 
-        Joueur joueur2 = new Joueur("toto");
-        PlayerComponent playerComponent=new PlayerComponent(joueur2);
+        // joueur2 = new Joueur("toto");
+        PlayerComponent playerComponent = new PlayerComponent(joueur2);
         playerComponent.getDernièreCarteJouer().add(imgJoueur);
         playerComponent.getMalus().add(imgJoueurMalus);
         playerComponent.getBottes().add(imgJoueurBot);
@@ -68,6 +72,6 @@ public class Plateau extends VerticalLayout {
 
         add(playerLeft,middleZone,footerZone);
         add(piocheCarte);
+    }
 
-    }
-    }
+}

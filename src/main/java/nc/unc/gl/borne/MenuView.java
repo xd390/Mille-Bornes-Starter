@@ -1,10 +1,8 @@
 package nc.unc.gl.borne;
 
-import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Image;
-import com.vaadin.flow.component.login.LoginI18n;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.html.Paragraph;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
@@ -12,11 +10,9 @@ import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import nc.unc.gl.borne.modele.Joueur;
+import nc.unc.gl.borne.services.JoueurService;
 import nc.unc.gl.borne.services.ObserverService;
-import nc.unc.gl.borne.session.Broadcaster;
-import nc.unc.gl.borne.session.VaadinSessionsHolder;
 
-import java.util.Map;
 
 @Route("menu")
 @PageTitle("Menu")
@@ -64,15 +60,9 @@ public class MenuView extends VerticalLayout {
     public void initPartie(){
         String name = pseudo.getValue();
         joueur = new Joueur(name);
-
-        info.setText("En attente de joueurs...");
-
-        System.out.println(name);
-
         observer = new ObserverService(joueur);
 
-        System.out.println(observer.getCurrent().getUIId());
-        System.out.println(observer.getCurrentUI());
+        info.setText("En attente de joueurs...");
 
         System.out.println(observer.getAllSessions());
 
@@ -85,8 +75,9 @@ public class MenuView extends VerticalLayout {
             }
         }
 
-
         info.setText("Redirection...");
+        JoueurService.setNomJoueur(name);
+        observer.lancerPartie();
         observer.getCurrent().navigate(Plateau.class);
     }
 
