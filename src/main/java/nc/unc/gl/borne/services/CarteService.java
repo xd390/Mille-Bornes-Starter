@@ -18,7 +18,7 @@ public class CarteService {
         switch (typeCarteAJouer) {
             //attaque
             case 0:
-                if (joueurCibler.getImmunites().size() != 0 && joueurCibler.isDemarre()==true && joueurCibler.getAttaque() == null ) {
+                if (joueurCibler.getImmunites().size() != 0 ) {
                     for (int i = 0; i < joueurCibler.getImmunites().size(); i++) {
                         if (joueurCibler.getImmunites().get(i).getEffet() == carteAJouer
                             .getEffet()){
