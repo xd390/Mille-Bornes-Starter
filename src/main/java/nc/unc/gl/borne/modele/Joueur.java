@@ -19,7 +19,6 @@ public class Joueur {
     public Carte vitesse;
 
 
-
     public Joueur( String pseudo) {
 
         this.pseudo = pseudo;
@@ -29,6 +28,14 @@ public class Joueur {
         this.demarre=false;
         this.attaque = null;
         this.vitesse = null;
+    }
+
+    public boolean isPeutJouer() {
+        return peutJouer;
+    }
+
+    public void setPeutJouer(boolean peutJouer) {
+        this.peutJouer = peutJouer;
     }
 
     public String getPseudo() {
