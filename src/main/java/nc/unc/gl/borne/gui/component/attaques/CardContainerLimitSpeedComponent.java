@@ -4,6 +4,7 @@ import com.vaadin.flow.component.HasStyle;
 import com.vaadin.flow.component.dnd.DropEffect;
 import com.vaadin.flow.component.dnd.DropTarget;
 import com.vaadin.flow.component.html.Div;
+import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.notification.Notification;
 import nc.unc.gl.borne.gui.component.normal.CardComponent;
 import nc.unc.gl.borne.modele.Carte;
@@ -12,10 +13,11 @@ import nc.unc.gl.borne.services.ObserverService;
 import static nc.unc.gl.borne.services.ObserverService.getCurrentJoueur;
 
 public class CardContainerLimitSpeedComponent extends Div implements DropTarget<CardComponent>, HasStyle {
+    private Div div;
     public CardContainerLimitSpeedComponent(){
-        this.addClassName("rectangle");
-        this.setText("Carte limite vitesse!");
-
+        this.addClassName("cardPlayerMalus");
+        div = new Div();
+        this.add(new Span("Carte attaque"),div);
         this.setActive(true);
         this.setDropEffect(DropEffect.MOVE);
         this.addDropListener(e ->{
@@ -34,7 +36,7 @@ public class CardContainerLimitSpeedComponent extends Div implements DropTarget<
                         this.add(carte.getImage());
                     }
                     else{
-                        Notification.show("Cette carte ne correspond au container");
+                        Notification.show("Cette carte ne correspond au container ou ce n'est pas votre tour");
                     }
                 });
             }

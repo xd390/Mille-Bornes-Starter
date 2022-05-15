@@ -4,6 +4,7 @@ import com.vaadin.flow.component.HasStyle;
 import com.vaadin.flow.component.dnd.DropEffect;
 import com.vaadin.flow.component.dnd.DropTarget;
 import com.vaadin.flow.component.html.Div;
+import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.notification.Notification;
 import nc.unc.gl.borne.gui.component.normal.CardComponent;
 import nc.unc.gl.borne.modele.Carte;
@@ -20,7 +21,7 @@ public class PoubelleContainerComponent extends Div implements DropTarget<CardCo
     private int effet;
     private int cpt=0;
     private boolean carteSpecifique;
-
+    private Div div;
     // TODO enlever les commentaires devant. private Joueur joueur;
     public PoubelleContainerComponent(String nameContainer){
 
@@ -28,8 +29,9 @@ public class PoubelleContainerComponent extends Div implements DropTarget<CardCo
         this.setActive(true);
         this.type = type;
         this.effet = effet;
-        this.addClassName("rectangle");
-        this.setText(nameContainer);
+        div = new Div();
+        div.addClassName("rectangle");
+        this.add(new Span(nameContainer),div);
         this.setDropEffect(DropEffect.MOVE);
         this.addDropListener(e ->{
             Notification.show("tentative de pose carte 1");
@@ -47,7 +49,7 @@ public class PoubelleContainerComponent extends Div implements DropTarget<CardCo
                         card.getImage().addClassName("superpose_card");
                         card.getImage().setId("img_" + cpt);
                         cpt++;
-                        this.add(card.getImage());
+                        div.add(card.getImage());
                     }
                     else{
                         Notification.show("Vous ne pouvez pas jouer cette carte ou ce n'est pas votre tour");

@@ -2,6 +2,7 @@ package nc.unc.gl.borne.gui.component;
 
 import com.vaadin.flow.component.HasStyle;
 import com.vaadin.flow.component.html.Div;
+import com.vaadin.flow.component.html.Image;
 import nc.unc.gl.borne.gui.component.attaques.CardContainerAttackComponent;
 import nc.unc.gl.borne.gui.component.attaques.CardContainerLimitSpeedComponent;
 import nc.unc.gl.borne.modele.Joueur;
@@ -25,24 +26,22 @@ public class PlayerComponent extends Div implements HasStyle {
         derniereCarteJouer.addClassName("superpose_card");
 
         malus = new CardContainerAttackComponent();
-        /*
         Image imageTemp = new Image("/cartes/back.png","Posez la carte attaque ici");
         imageTemp.addClassName("cardMalusPlayerLeft");
-        malus.add(imageTemp);
-        */
+        malus.getDiv().add(imageTemp);
+
         limiteVitesse = new CardContainerLimitSpeedComponent();
-        /*
         Image imageTemp2 = new Image("/cartes/back.png","Posez la carte limite vitesse ici");
         imageTemp2.addClassName("cardMalusPlayerLeft");
         limiteVitesse.add(imageTemp2);
-        */
+
         bottes = new Div();
         bottes.addClassName("cardPlayerBot");
         bottes.addClassName("superpose_card");
         bottes.setId("img_bot"+cpt_bot);
         cpt_bot++;
 
-        add(derniereCarteJouer, bottes, malus, limiteVitesse);
+        add(derniereCarteJouer, malus, limiteVitesse ,bottes );
     }
 
     public Div getBottes() {

@@ -4,6 +4,7 @@ import com.vaadin.flow.component.HasStyle;
 import com.vaadin.flow.component.dnd.DropEffect;
 import com.vaadin.flow.component.dnd.DropTarget;
 import com.vaadin.flow.component.html.Div;
+import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.notification.Notification;
 import nc.unc.gl.borne.gui.component.normal.CardComponent;
 import nc.unc.gl.borne.modele.Carte;
@@ -13,10 +14,11 @@ import static nc.unc.gl.borne.services.ObserverService.getCurrentJoueur;
 
 
 public class CardParadeConpoment extends Div implements DropTarget<CardComponent>, HasStyle {
+    private Div div;
     public CardParadeConpoment(){
-        this.addClassName("rectangle");
-        this.setText("Contre attaque");
-
+        div = new Div();
+        div.addClassName("rectangle");
+        this.add(new Span("Contre attaque"),div);
         this.setActive(true);
         this.setDropEffect(DropEffect.MOVE);
         this.addDropListener(e ->{
@@ -31,8 +33,9 @@ public class CardParadeConpoment extends Div implements DropTarget<CardComponent
                         CardComponent carte = (CardComponent) e.getDragSourceComponent().get();
                         carte.getImage().removeClassName("size_of_card_player");
                         carte.getImage().removeClassName("space_between_img");
-                        carte.getImage().addClassName("cardMalusPlayerLeft");
-                        this.add(carte.getImage());
+                        carte.getImage().addClassName("size_of_depository_card");
+                        carte.getImage().addClassName("superpose_card");
+                        div.add(carte.getImage());
                     }
                     else{
                         Notification.show("Cette carte ne correspond au container");

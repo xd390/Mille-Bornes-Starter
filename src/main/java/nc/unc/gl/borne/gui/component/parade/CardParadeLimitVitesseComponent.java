@@ -4,6 +4,7 @@ import com.vaadin.flow.component.HasStyle;
 import com.vaadin.flow.component.dnd.DropEffect;
 import com.vaadin.flow.component.dnd.DropTarget;
 import com.vaadin.flow.component.html.Div;
+import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.notification.Notification;
 import nc.unc.gl.borne.gui.component.normal.CardComponent;
 import nc.unc.gl.borne.modele.Carte;
@@ -12,9 +13,11 @@ import nc.unc.gl.borne.services.ObserverService;
 import static nc.unc.gl.borne.services.ObserverService.getCurrentJoueur;
 
 public class CardParadeLimitVitesseComponent extends Div implements DropTarget<CardComponent>, HasStyle {
+    private Div div;
     public CardParadeLimitVitesseComponent(){
-        this.addClassName("rectangle");
-        this.setText("Fin de limite vitesse");
+        div = new Div();
+        div.addClassName("rectangle");
+        this.add(new Span("Fin de limite vitesse"),div);
 
         this.setActive(true);
         this.setDropEffect(DropEffect.MOVE);
@@ -30,7 +33,8 @@ public class CardParadeLimitVitesseComponent extends Div implements DropTarget<C
                         CardComponent carte = (CardComponent) e.getDragSourceComponent().get();
                         carte.getImage().removeClassName("size_of_card_player");
                         carte.getImage().removeClassName("space_between_img");
-                        carte.getImage().addClassName("cardMalusPlayerLeft");
+                        carte.getImage().addClassName("size_of_depository_card");
+                        carte.getImage().addClassName("superpose_card");
                         this.add(carte.getImage());
                     }
                     else{

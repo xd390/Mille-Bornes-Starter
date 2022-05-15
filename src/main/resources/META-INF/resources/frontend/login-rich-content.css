@@ -44,7 +44,7 @@
 }
 .rectangle {
     border:3px solid darkgray;
-    width: 10%;
+    width: 60%;
     height: 200px;
     color: rgba(0, 0, 0, 0.3);
     margin: 3em;
@@ -89,7 +89,8 @@
     width: 5%;
 }
 .cardPlayerMalus{
-    width: 5%;
+    height: 200%;
+    border:3px solid darkgray;
 }
 
 .cardPlayerBot{
