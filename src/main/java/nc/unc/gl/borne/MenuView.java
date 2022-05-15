@@ -77,7 +77,6 @@ public class MenuView extends VerticalLayout {
         String name = pseudo.getValue();
         joueur = new Joueur(name);
         observer = new ObserverService(joueur);
-        JoueurService.setNomJoueur(name);
 
         System.out.println(observer.getAllSessions());
 
