@@ -5,6 +5,8 @@ import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Image;
 import nc.unc.gl.borne.modele.Joueur;
 
+import static nc.unc.gl.borne.services.ObserverService.getCurrentAutreJoueur;
+
 public class PlayerComponent extends Div implements HasStyle {
     private Div derniereCarteJouer;
     private Joueur joueur1;
