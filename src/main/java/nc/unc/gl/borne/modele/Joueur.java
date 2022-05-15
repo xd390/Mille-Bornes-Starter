@@ -38,6 +38,8 @@ public class Joueur {
         this.peutJouer = peutJouer;
     }
 
+    public boolean getPeutJouer(){return this.peutJouer;}
+
     public String getPseudo() {
         return pseudo;
     }

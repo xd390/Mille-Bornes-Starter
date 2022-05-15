@@ -6,14 +6,21 @@ import com.vaadin.flow.component.html.Image;
 import nc.unc.gl.borne.modele.Joueur;
 
 public class PlayerComponent extends Div implements HasStyle {
+    private Div derniereCarteJouer;
     private Joueur joueur1;
     private Joueur joueur2;
     private Div dernièreCarteJouer;
     private CardContainerAttackComponent malus;
     private Div bottes;
+    private int cpt_bot=0;
 
     public PlayerComponent(Joueur joueur1, Joueur joueur2){
         this.setId("infoJoueur");
+        this.setText("count : "+joueur.getPoints()+" player :"+joueur.getPseudo());
+        derniereCarteJouer = new Div();
+        derniereCarteJouer.addClassName("cardPlayerBot");
+        derniereCarteJouer.addClassName("superpose_card");
+        malus = new CardContainerAttackComponent();
         this.setText("count : "+joueur2.getPoints()+" player :"+joueur2.getPseudo());
         this.joueur1 = joueur1;
         this.joueur2 = joueur2;
@@ -25,8 +32,11 @@ public class PlayerComponent extends Div implements HasStyle {
         malus.add(imageTemp);
         bottes = new Div();
         bottes.addClassName("cardPlayerBot");
+        bottes.addClassName("superpose_card");
+        bottes.setId("img_bot"+cpt_bot);
+        cpt_bot++;
 
-        add(dernièreCarteJouer,malus,bottes);
+        add(derniereCarteJouer,malus,bottes);
     }
 
     public Div getBottes() {
@@ -34,7 +44,7 @@ public class PlayerComponent extends Div implements HasStyle {
     }
 
     public Div getDernièreCarteJouer() {
-        return dernièreCarteJouer;
+        return derniereCarteJouer;
     }
 
     public CardContainerAttackComponent getMalus() {
@@ -42,6 +52,6 @@ public class PlayerComponent extends Div implements HasStyle {
     }
 
     public Joueur getJoueur() {
-        return joueur1;
+        return joueur;
     }
 }

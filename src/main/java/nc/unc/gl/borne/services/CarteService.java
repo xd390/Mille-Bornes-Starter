@@ -1,6 +1,5 @@
 package nc.unc.gl.borne.services;
 import nc.unc.gl.borne.modele.Carte;
-import nc.unc.gl.borne.modele.Deck;
 import nc.unc.gl.borne.modele.Joueur;
 import nc.unc.gl.borne.services.JoueurService;
 
@@ -8,38 +7,38 @@ public class CarteService {
 
     JoueurService JoueurService = new JoueurService();
 
-    public boolean jouerCarte(Carte carteajouer, Joueur joueur,Joueur joueurCibler) {
-        int typecarteajouer = carteajouer.getType();
+    public boolean jouerCarte(Carte carteAJouer, Joueur joueur,Joueur joueurCibler) {
+        int typeCarteAJouer = carteAJouer.getType();
         boolean possible = false;
         boolean isImmune = false;
 
-        switch (typecarteajouer) {
+        switch (typeCarteAJouer) {
             //attaque
             case 0:
                 if (joueurCibler.getImmunites().size() != 0 && joueurCibler.isDemarre()==true && joueurCibler.getAttaque() == null ) {
                     for (int i = 0; i < joueurCibler.getImmunites().size(); i++) {
-                        if (joueurCibler.getImmunites().get(i).getEffet() == carteajouer
+                        if (joueurCibler.getImmunites().get(i).getEffet() == carteAJouer
                             .getEffet()){
                             isImmune=true;
                         }
-                        if (joueurCibler.getImmunites().get(i).getEffet()==2 && carteajouer
+                        if (joueurCibler.getImmunites().get(i).getEffet()==2 && carteAJouer
                             .getEffet()==1){
                             isImmune=true;
                         }
-                        if (joueurCibler.getImmunites().get(i).getEffet()==1 && carteajouer
+                        if (joueurCibler.getImmunites().get(i).getEffet()==1 && carteAJouer
                             .getEffet()==2){
                             isImmune=true;
                         }
                 }
 
                 }
-                if (carteajouer.getEffet()==2 && joueurCibler.getVitesse()==null && isImmune==false){
+                if (carteAJouer.getEffet()==2 && joueurCibler.getVitesse()==null && isImmune==false){
                     possible = true;
-                    JoueurService.poserLimiteVitesse(carteajouer, joueur, joueurCibler);
+                    JoueurService.poserLimiteVitesse(carteAJouer, joueur, joueurCibler);
                 }
                 else if(joueurCibler.getAttaque() == null && joueurCibler.isDemarre()==true && isImmune==false) {
                     possible = true;
-                    JoueurService.attaquer(carteajouer, joueur, joueurCibler);
+                    JoueurService.attaquer(carteAJouer, joueur, joueurCibler);
                 }
                 else{
                     System.out.println("joueurCibler n'est pas attaquable.");
@@ -51,9 +50,9 @@ public class CarteService {
 			/* Vérification de l'utilisation d'une carte "feu vert".
 			Deux utilisations possibles selon qu'on soit en début de partie
 			ou après avoir démarré au moins une fois. */
-                if (joueur.isDemarre() == false && carteajouer.getEffet() == 1) {
+                if (joueur.isDemarre() == false && carteAJouer.getEffet() == 1) {
                     possible = true;
-                    JoueurService.poserParade(carteajouer, joueur);
+                    JoueurService.poserParade(carteAJouer, joueur);
                 }
 
                 // Vérification que la joueur a bien été attaqué.
@@ -62,15 +61,15 @@ public class CarteService {
 				/* Vérification de la correspondance entre la carte attaque et
 				la carte parade. */
                     if (joueur.getAttaque() != null
-                        && joueur.getAttaque().getEffet() == carteajouer
+                        && joueur.getAttaque().getEffet() == carteAJouer
                         .getEffet()) {
                         possible = true;
-                        JoueurService.poserParade(carteajouer, joueur);
+                        JoueurService.poserParade(carteAJouer, joueur);
                     } else if (joueur.getVitesse() != null
-                        && joueur.getVitesse().getEffet() == carteajouer
+                        && joueur.getVitesse().getEffet() == carteAJouer
                         .getEffet()) {
                         possible = true;
-                        JoueurService.poserFinLimite(carteajouer, joueur);
+                        JoueurService.poserFinLimite(carteAJouer, joueur);
                     }
                     else{
                         System.out.println("Votre carte parade ne correspond pas a l'attaque recue ");
@@ -86,13 +85,13 @@ public class CarteService {
             case 2:
 
                 possible = true;
-                JoueurService.poserBotte(carteajouer, joueur);
+                JoueurService.poserBotte(carteAJouer, joueur);
 
-                if (joueur.isDemarre() == false && carteajouer.getEffet() == 1 || carteajouer.getEffet() == 2){
+                if (joueur.isDemarre() == false && carteAJouer.getEffet() == 1 || carteAJouer.getEffet() == 2){
                     joueur.setDemarre(true);
                 }
 
-                if (joueur.getAttaque() !=null && joueur.getAttaque().getEffet()==carteajouer.getEffet()) {
+                if (joueur.getAttaque() !=null && joueur.getAttaque().getEffet()==carteAJouer.getEffet()) {
                     joueur.setAttaque(null);
                 }
                 break;
@@ -107,16 +106,16 @@ public class CarteService {
                     if (joueur.getAttaque() == null) {
                         // Vérification de la limite de vitesse.
                         if (joueur.getVitesse() != null) {
-                            if (carteajouer.getEffet() <3) {
+                            if (carteAJouer.getEffet() <3) {
                                 possible = true;
-                                JoueurService.poserBorne(carteajouer,joueur);
+                                JoueurService.poserBorne(carteAJouer,joueur);
                             } else
                                 System.out.println("Vous êtes limité à 50.");
-                        } else if (joueur.getPoints() + Integer.parseInt(Carte.getEffets()[3][carteajouer.getEffet()]) > 1000)
+                        } else if (joueur.getPoints() + Integer.parseInt(Carte.getEffets()[3][carteAJouer.getEffet()]) > 1000)
                             System.out.println("Vous ne pouvez pas dépasser mille bornes !");
                         else {
                             possible = true;
-                            JoueurService.poserBorne(carteajouer, joueur);
+                            JoueurService.poserBorne(carteAJouer, joueur);
                         }
                     } else
                         System.out.println("Vous avez été attaqué !");
