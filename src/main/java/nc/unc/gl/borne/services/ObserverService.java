@@ -10,21 +10,20 @@ import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class ObserverService {
-    private UI ui = new UI();
     public static Deck deck = new Deck();
-    private static final CarteService carteService = new CarteService();
-    private static final DeckService deckService = new DeckService();
-    private final static Map<String, Joueur> sessions = new ConcurrentHashMap<>();
+    private static CarteService carteService = new CarteService();
+    private static DeckService deckService = new DeckService();
+    private static Map<String, Joueur> sessions = new ConcurrentHashMap<>();
     private static List<Joueur> listeJoueur = new ArrayList<>();
     private static boolean check = false;
 
     public ObserverService(Joueur joueur){
-        sessions.put(joueur.getPseudo(), joueur);
+        sessions.put(getCurrent().getCsrfToken(), joueur);
     }
 
-    public static void finTour(String nomJoueur){
-        Joueur j1 = getJoueur(nomJoueur);
-        Joueur j2 = getAutreJoueur(nomJoueur);
+    public static void finTour(){
+        Joueur j1 = getCurrentJoueur();
+        Joueur j2 = getCurrentAutreJoueur();
 
         j1.setPeutJouer(false);
         j2.setPeutJouer(true);
@@ -35,6 +34,14 @@ public class ObserverService {
 
     public UI getCurrent() {
         return UI.getCurrent();
+    }
+
+    public static Joueur getCurrentJoueur(){
+        return sessions.get(UI.getCurrent().getCsrfToken());
+    }
+
+    public static Joueur getCurrentAutreJoueur(){
+        return getAutreJoueur(UI.getCurrent().getCsrfToken());
     }
 
     public static Joueur getJoueur(String key) {
@@ -59,20 +66,23 @@ public class ObserverService {
     public static void lancerPartie(){
         if (check)
             return;
+        check = true;
         deckService.initialiserDeck(deck);
         Collection<Joueur> liste = sessions.values();
         Object[] res = liste.toArray();
         Joueur j1 = (Joueur) res[0];
         Joueur j2 = (Joueur) res[1];
         deckService.distribuerMain(deck, j1, j2);
+        j1.setPeutJouer(true);
+        System.out.println(sessions);
+        /*
         listeJoueur.add(j1);
         listeJoueur.add(j2);
         listeJoueur.get(new Random().nextInt(res.length)).setPeutJouer(true);
-
-        check = true;
+        */
     }
-    public static boolean ActionJoueur(Carte carte,String nomJoueur){
-        boolean isValid = carteService.jouerCarte(carte,getJoueur(nomJoueur),getAutreJoueur(nomJoueur));
+    public static boolean ActionJoueur(Carte carte){
+        boolean isValid = carteService.jouerCarte(carte, getJoueur(UI.getCurrent().getCsrfToken()),getCurrentAutreJoueur());
         if (deck.size() == 0){
             finPartie();
             return false;

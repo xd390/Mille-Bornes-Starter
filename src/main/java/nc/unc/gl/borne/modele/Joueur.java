@@ -93,7 +93,8 @@ public class Joueur {
     public String toString() {
         return "Joueur [pseudo=" + pseudo + ", points=" + points + ", main=" + main
             + ", demarre=" + demarre + ", attaque=" + attaque
-            + ", vitesse=" + vitesse + ", immunites=" + immunites + "]";
+            + ", vitesse=" + vitesse + ", immunites=" + immunites + "]"
+            + " , peutJouer= " + peutJouer;
     }
 
 

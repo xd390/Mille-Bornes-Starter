@@ -79,6 +79,8 @@ public class MenuView extends VerticalLayout {
         observer = new ObserverService(joueur);
         JoueurService.setNomJoueur(name);
 
+        System.out.println(observer.getAllSessions());
+
         while (ObserverService.getAllSessions().size() < 2){
             try {
                 Thread.sleep(1000);

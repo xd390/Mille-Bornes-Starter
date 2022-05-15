@@ -26,13 +26,13 @@ public class Plateau extends VerticalLayout {
         private final HorizontalLayout playerLeft;
         private final HorizontalLayout middleZone;
         private final HorizontalLayout footerZone;
-        private final Joueur joueur1;
-        private final Joueur joueur2;
+        private Joueur joueur1;
+        private Joueur joueur2;
         private final Div divJoueur1=new Div();
 
     public Plateau() {
-        joueur1 = ObserverService.getJoueur(JoueurService.getNomJoueur());
-        joueur2 = ObserverService.getAutreJoueur(JoueurService.getNomJoueur());
+        joueur1 = ObserverService.getCurrentJoueur();
+        joueur2 = ObserverService.getCurrentAutreJoueur();
 
         middleZone = new HorizontalLayout();
         CardContainerComponent r1 = new CardContainerComponent(3,1,"25",false);
@@ -68,8 +68,6 @@ public class Plateau extends VerticalLayout {
         add(playerLeft,middleZone,footerZone);
         add(piocheCarte);
         ajouterCarteDebut();
-
-
     }
     public static void showDialog(String caption) {
         VerticalLayout dialogLayout = new VerticalLayout(new Div());
