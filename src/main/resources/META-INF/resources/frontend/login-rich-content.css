@@ -109,7 +109,6 @@
 .superpose_card{
     position: absolute;
 
-
 }
 
 #img_0{
@@ -137,5 +136,34 @@
     z-index: 5;
 }
 
+#img_bot_0{
+    z-index: 1;
+    top: 0px;
+}
+
+#img_bot_1{
+    z-index: 2;
+    top: 25px;
+}
+
+#img_bot_2{
+    z-index: 3;
+    top: 50px;
+}
+
+#img_bot_3{
+    z-index: 4;
+    top: 75px;
+}
+
+.style_txt{
+    font-size:small;
+}
+
+.position_of_info_j1{
+    position: fixed;
+    bottom: 0;
+    left: 5px;
+}
 
 

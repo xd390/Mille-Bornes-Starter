@@ -10,24 +10,29 @@ import nc.unc.gl.borne.modele.Joueur;
 
 public class PlayerComponent extends Div implements HasStyle {
     private Joueur joueur;
-    private Div dernièreCarteJouer;
+    private Div derniereCarteJouer;
     private CardContainerAttackComponent malus;
     private Div bottes;
+    private int cpt_bot=0;
 
     public PlayerComponent(Joueur joueur){
         this.setId("infoJoueur");
         this.setText("count : "+joueur.getPoints()+" player :"+joueur.getPseudo());
         this.joueur = joueur;
-        dernièreCarteJouer = new Div();
-        dernièreCarteJouer.addClassName("cardPlayerBot");
+        derniereCarteJouer = new Div();
+        derniereCarteJouer.addClassName("cardPlayerBot");
+        derniereCarteJouer.addClassName("superpose_card");
         malus = new CardContainerAttackComponent();
         Image imageTemp = new Image("/cartes/back.png","Posez la carte attaque ici");
         imageTemp.addClassName("cardMalusPlayerLeft");
         malus.add(imageTemp);
         bottes = new Div();
         bottes.addClassName("cardPlayerBot");
+        bottes.addClassName("superpose_card");
+        bottes.setId("img_bot"+cpt_bot);
+        cpt_bot++;
 
-        add(dernièreCarteJouer,malus,bottes);
+        add(derniereCarteJouer,malus,bottes);
     }
 
     public Div getBottes() {
@@ -35,7 +40,7 @@ public class PlayerComponent extends Div implements HasStyle {
     }
 
     public Div getDernièreCarteJouer() {
-        return dernièreCarteJouer;
+        return derniereCarteJouer;
     }
 
     public CardContainerAttackComponent getMalus() {

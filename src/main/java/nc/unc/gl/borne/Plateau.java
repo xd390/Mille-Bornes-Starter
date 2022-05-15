@@ -5,6 +5,8 @@ import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.dependency.StyleSheet;
 import com.vaadin.flow.component.html.Div;
+import com.vaadin.flow.component.html.H1;
+import com.vaadin.flow.component.html.H2;
 import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
@@ -17,6 +19,8 @@ import nc.unc.gl.borne.modele.Joueur;
 import nc.unc.gl.borne.services.JoueurService;
 import nc.unc.gl.borne.services.ObserverService;
 
+import java.awt.*;
+
 @Route("plateau")
 @StyleSheet("frontend/login-rich-content.css")
 public class Plateau extends VerticalLayout {
@@ -25,6 +29,7 @@ public class Plateau extends VerticalLayout {
         private final HorizontalLayout footerZone;
         private final Joueur joueur1;
         private final Joueur joueur2;
+        private final Div divJoueur1=new Div();
 
     public Plateau() {
         joueur1 = ObserverService.getJoueur(JoueurService.getNomJoueur());
@@ -45,10 +50,16 @@ public class Plateau extends VerticalLayout {
         playerLeft = new HorizontalLayout();
         playerLeft.addClassName("playerRight");
         PlayerComponent playerComponent = new PlayerComponent(joueur2);
+        playerComponent.addClassName("style_txt");
         playerLeft.add(playerComponent);
 
         footerZone = new HorizontalLayout();
         footerZone.addClassName("footer");
+        H1 infoJ1 = new H1("count : "+String.valueOf(joueur1.getPoints())+" player : "+joueur1.getPseudo());
+        infoJ1.addClassName("style_txt");
+        infoJ1.addClassName("position_of_info_j1");
+        divJoueur1.add(infoJ1);
+        footerZone.add(divJoueur1);
 
         Div piocheCarte=new Div();
         piocheCarte.setId("piocheCarte");
@@ -58,6 +69,8 @@ public class Plateau extends VerticalLayout {
         add(playerLeft,middleZone,footerZone);
         add(piocheCarte);
         ajouterCarteDebut();
+
+
     }
     private void ajouterCarteDebut(){
         for(int i=0;i< joueur1.getMain().size();i++){
