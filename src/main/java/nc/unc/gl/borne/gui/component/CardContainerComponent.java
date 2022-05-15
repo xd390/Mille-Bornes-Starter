@@ -37,7 +37,7 @@ public class CardContainerComponent extends Div implements DropTarget<CardCompon
                         // component was dragged from the same UI as the drop target
                         Carte carte = (Carte) data;
                         if(type == carte.getType() && effet == carte.getEffet() | carteSpecifique && type == carte.getType()){
-                            if(ObserverService.ActionJoueur(carte, JoueurService.getNomJoueur())) {
+                            if(ObserverService.ActionJoueur(carte)) {
                                 CardComponent card = (CardComponent) e.getDragSourceComponent().get();
                                 card.getImage().removeClassName("size_of_card_player");
                                 card.getImage().removeClassName("space_between_img");

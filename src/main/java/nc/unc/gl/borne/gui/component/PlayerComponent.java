@@ -8,6 +8,8 @@ import com.vaadin.flow.component.notification.Notification;
 import nc.unc.gl.borne.modele.Carte;
 import nc.unc.gl.borne.modele.Joueur;
 
+import static nc.unc.gl.borne.services.ObserverService.getCurrentAutreJoueur;
+
 public class PlayerComponent extends Div implements HasStyle {
     private Joueur joueur;
     private Div derniereCarteJouer;
