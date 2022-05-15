@@ -75,12 +75,9 @@
     outline: 1px solid lightgreen;
 }
 
-.cardPlayerMalusAvant {
-    border: 3px solid darkgray;
-}
 .cardMalusPlayerLeft{
-    width: 35%;
-    height: 60%;
+    position: absolute;
+    width: 5%;
 }
 .cardPlayerMalus{
     width: 5%;

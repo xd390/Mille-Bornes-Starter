@@ -11,7 +11,7 @@ import nc.unc.gl.borne.modele.Joueur;
 public class PlayerComponent extends Div implements HasStyle {
     private Joueur joueur;
     private Div dernièreCarteJouer;
-    private CardContainerComponent malus;
+    private CardContainerAttackComponent malus;
     private Div bottes;
 
     public PlayerComponent(Joueur joueur){
@@ -20,35 +20,10 @@ public class PlayerComponent extends Div implements HasStyle {
         this.joueur = joueur;
         dernièreCarteJouer = new Div();
         dernièreCarteJouer.addClassName("cardPlayerBot");
-        malus = new CardContainerComponent(0, 0, "Malus",true);
-        malus.addClassName("cardPlayerMalusAvant");
+        malus = new CardContainerAttackComponent();
         Image imageTemp = new Image("/cartes/back.png","Posez la carte attaque ici");
         imageTemp.addClassName("cardMalusPlayerLeft");
         malus.add(imageTemp);
-        malus.removeClassName("rectangle");
-        malus.addDropListener(e ->{
-            Notification.show("tentative de pose carte");
-            if(e.getDropEffect() == DropEffect.MOVE) {
-                e.getDragData().ifPresent(data -> {
-                    // the server side drag data is available if it has been set and the
-                    // component was dragged from the same UI as the drop target
-                    Carte res = (Carte) data;
-                    if(malus.getType() == res.getType() && malus.getEffet() == res.getEffet() | malus.isCarteSpecifique() &&  malus.getType() == res.getType()){
-                        CardComponent res2 = (CardComponent) e.getDragSourceComponent().get();
-                        res2.getImage().removeClassName("size_of_card_player");
-                        res2.getImage().removeClassName("space_between_img");
-                        res2.getImage().removeClassName("space_between_img");
-                        res2.getImage().addClassName("cardMalusPlayerLeft");
-                        res2.getImage().setId("img_");
-                        malus.add(res2.getImage());
-                        // TODO appeler le service et faire jouer la carte
-                    }
-                    else{
-                        Notification.show("Cette carte ne correspond au container");
-                    }
-                });
-            }
-        });
         bottes = new Div();
         bottes.addClassName("cardPlayerBot");
 
@@ -63,7 +38,7 @@ public class PlayerComponent extends Div implements HasStyle {
         return dernièreCarteJouer;
     }
 
-    public CardContainerComponent getMalus() {
+    public CardContainerAttackComponent getMalus() {
         return malus;
     }
 
