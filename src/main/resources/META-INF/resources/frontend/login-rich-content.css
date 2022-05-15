@@ -19,6 +19,15 @@
     background:rgba(255,255,255,0.5);
 }
 
+.containerDepotCarteUpper{
+    position: fixed;
+    top: 25%;
+    left: 50%;
+    width: 70%;
+    margin:0 auto;
+    transform: translate(-50%, -50%);
+}
+
 .containerDepotCarte{
     position: fixed;
     top: 50%;

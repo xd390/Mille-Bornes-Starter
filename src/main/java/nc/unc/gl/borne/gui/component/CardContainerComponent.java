@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static nc.unc.gl.borne.services.ObserverService.getCurrentAutreJoueur;
+import static nc.unc.gl.borne.services.ObserverService.getCurrentJoueur;
 
 public class CardContainerComponent extends Div implements DropTarget<CardComponent>, HasStyle {
         public List<CardComponent> cartes = new ArrayList<>();
@@ -24,8 +25,6 @@ public class CardContainerComponent extends Div implements DropTarget<CardCompon
 
         // TODO enlever les commentaires devant. private Joueur joueur;
         public CardContainerComponent(int type, int effet, String nameContainer, Boolean carteSpecifique){
-
-
             this.carteSpecifique = carteSpecifique;
             this.setActive(true);
             this.type = type;
@@ -41,7 +40,8 @@ public class CardContainerComponent extends Div implements DropTarget<CardCompon
                         // component was dragged from the same UI as the drop target
                         Carte carte = (Carte) data;
                         if(type == carte.getType() && effet == carte.getEffet() | carteSpecifique && type == carte.getType()){
-                            if(ObserverService.ActionJoueur(carte, "play") && getCurrentAutreJoueur().getPeutJouer()) {
+                            boolean peutJouer = getCurrentJoueur().getPeutJouer();
+                            if(ObserverService.ActionJoueur(carte, "play") && peutJouer) {
                                 CardComponent card = (CardComponent) e.getDragSourceComponent().get();
                                 card.getImage().removeClassName("size_of_card_player");
                                 card.getImage().removeClassName("space_between_img");
