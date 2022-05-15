@@ -12,6 +12,10 @@ public class CarteService {
         boolean possible = false;
         boolean isImmune = false;
 
+        if (!joueur.getPeutJouer()){
+            return false;
+        }
+
         switch (typeCarteAJouer) {
             //attaque
             case 0:

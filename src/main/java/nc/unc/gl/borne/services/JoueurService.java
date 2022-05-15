@@ -10,7 +10,6 @@ public class JoueurService {
 
     public static void piocherCarte(Deck pioche,Joueur joueur) {
         joueur.main.add((Carte) pioche.pop());
-
     }
 
     public void defausserCarte(Carte carte,Joueur joueur) {
@@ -51,8 +50,8 @@ public class JoueurService {
         }
         else {
             joueur.setAttaque(null);
-            joueur.main.remove(carteParade);
         }
+        joueur.main.remove(carteParade);
 
     }
 

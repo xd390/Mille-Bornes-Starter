@@ -1,27 +1,25 @@
 package nc.unc.gl.borne;
 
-import com.vaadin.flow.component.HtmlContainer;
-import com.vaadin.flow.component.UI;
+
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.dependency.StyleSheet;
-import com.vaadin.flow.component.html.Div;
-import com.vaadin.flow.component.html.H1;
-import com.vaadin.flow.component.html.H3;
+import com.vaadin.flow.component.html.*;
 import com.vaadin.flow.component.html.Image;
-import com.vaadin.flow.component.html.Label;
+import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
 import nc.unc.gl.borne.gui.component.CardComponent;
 import nc.unc.gl.borne.gui.component.CardContainerComponent;
 import nc.unc.gl.borne.gui.component.PlayerComponent;
-import nc.unc.gl.borne.modele.Carte;
 import nc.unc.gl.borne.modele.Joueur;
 import nc.unc.gl.borne.services.JoueurService;
 import nc.unc.gl.borne.services.ObserverService;
 import com.vaadin.flow.component.dialog.Dialog;
 
-import java.awt.*;
+
+import static nc.unc.gl.borne.services.ObserverService.getCurrentAutreJoueur;
+import static nc.unc.gl.borne.services.ObserverService.getCurrentJoueur;
 
 @Route("plateau")
 @StyleSheet("frontend/login-rich-content.css")
@@ -29,21 +27,19 @@ public class Plateau extends VerticalLayout {
         private final HorizontalLayout playerLeft;
         private final HorizontalLayout middleZone;
         private final HorizontalLayout footerZone;
-        private Joueur joueur1;
-        private Joueur joueur2;
+        public static Joueur joueur2;
         private final Div divJoueur1=new Div();
         private final Div divPoubelle=new Div();
 
+        private H1 infoJ1;
+
     public Plateau() {
-        joueur1 = ObserverService.getCurrentJoueur();
-        joueur2 = ObserverService.getCurrentAutreJoueur();
+        joueur2 = getCurrentAutreJoueur();
 
         Image poubelle=new Image("Images/poubelle.jpg","poubelle");
         poubelle.addClassName("size_trash");
         divPoubelle.addClassName("trash");
         divPoubelle.add(poubelle);
-
-
 
         middleZone = new HorizontalLayout();
 
@@ -57,19 +53,15 @@ public class Plateau extends VerticalLayout {
         middleZone.addClassName("containerDepotCarte");
         middleZone.add(r1,r2,r3,r4,r5,r6,r7);
 
-
-
-
-
         playerLeft = new HorizontalLayout();
         playerLeft.addClassName("playerRight");
-        PlayerComponent playerComponent = new PlayerComponent(joueur2);
+        PlayerComponent playerComponent = new PlayerComponent(getCurrentAutreJoueur());
         playerComponent.addClassName("style_txt");
         playerLeft.add(playerComponent);
 
         footerZone = new HorizontalLayout();
         footerZone.addClassName("footer");
-        H1 infoJ1 = new H1("count : "+String.valueOf(joueur1.getPoints())+" player : "+joueur1.getPseudo());
+        infoJ1 = new H1("Score : "+String.valueOf(getCurrentJoueur().getPoints())+" player : "+getCurrentJoueur().getPseudo());
         infoJ1.addClassName("style_txt");
         infoJ1.addClassName("position_of_info_j1");
         divJoueur1.add(infoJ1);
@@ -80,6 +72,7 @@ public class Plateau extends VerticalLayout {
         piocheCarte.setId("piocheCarte");
         Button buttonPioche = new Button("Pioche");
         piocheCarte.add(buttonPioche);
+        piocheCarte.addClickListener(buttonClickEvent -> piocherCarte());
 
         add(playerLeft,middleZone,footerZone);
         add(piocheCarte);
@@ -96,9 +89,23 @@ public class Plateau extends VerticalLayout {
         dialog.open();
     }
 
+
+    public void piocherCarte(){
+        int nbCartes = getCurrentJoueur().getMain().size();
+        if (!getCurrentJoueur().getPeutJouer()){
+            Notification.show("Ce n'est pas votre tour!");
+        }
+        else if (nbCartes > 6){
+            Notification.show("Vous avez trop de cartes");
+        }
+        else{
+            JoueurService.piocherCarte(ObserverService.getDeck(), getCurrentJoueur());
+            footerZone.add(new CardComponent(getCurrentJoueur().getMain().get(getCurrentJoueur().getMain().size()-1)));
+        }
+    }
     private void ajouterCarteDebut(){
-        for(int i=0;i< joueur1.getMain().size();i++){
-            footerZone.add(new CardComponent(joueur1.getMain().get(i)));
+        for(int i=0;i< getCurrentJoueur().getMain().size();i++){
+            footerZone.add(new CardComponent(getCurrentJoueur().getMain().get(i)));
         }
     }
 

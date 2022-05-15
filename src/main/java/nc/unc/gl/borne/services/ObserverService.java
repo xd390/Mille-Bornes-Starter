@@ -9,6 +9,7 @@ import nc.unc.gl.borne.modele.Joueur;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
+
 public class ObserverService {
     public static Deck deck = new Deck();
     private static CarteService carteService = new CarteService();
@@ -18,15 +19,12 @@ public class ObserverService {
     private static boolean check = false;
 
     public ObserverService(Joueur joueur){
-        sessions.put(getCurrent().getCsrfToken(), joueur);
+        this.sessions.put(getCurrent().getCsrfToken(), joueur);
     }
 
     public static void finTour(){
-        Joueur j1 = getCurrentJoueur();
-        Joueur j2 = getCurrentAutreJoueur();
-
-        j1.setPeutJouer(false);
-        j2.setPeutJouer(true);
+        getCurrentJoueur().setPeutJouer(false);
+        getCurrentAutreJoueur().setPeutJouer(true);
     }
     public static void finPartie(){
         Plateau.showDialog("Fin de partie!");
@@ -34,6 +32,10 @@ public class ObserverService {
 
     public UI getCurrent() {
         return UI.getCurrent();
+    }
+
+    public static Deck getDeck(){
+        return deck;
     }
 
     public static Joueur getCurrentJoueur(){
@@ -83,6 +85,7 @@ public class ObserverService {
     }
     public static boolean ActionJoueur(Carte carte){
         boolean isValid = carteService.jouerCarte(carte, getCurrentJoueur(), getCurrentAutreJoueur());
+        System.out.println(getCurrentJoueur());
         if (deck.size() == 0){
             finPartie();
             return false;
