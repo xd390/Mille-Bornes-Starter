@@ -1,44 +1,52 @@
 package nc.unc.gl.borne.gui.component;
 
 import com.vaadin.flow.component.HasStyle;
+import com.vaadin.flow.component.dnd.DropEffect;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Image;
+import com.vaadin.flow.component.notification.Notification;
+import nc.unc.gl.borne.modele.Carte;
 import nc.unc.gl.borne.modele.Joueur;
 
 import static nc.unc.gl.borne.services.ObserverService.getCurrentAutreJoueur;
 
 public class PlayerComponent extends Div implements HasStyle {
+    private Joueur joueur;
     private Div derniereCarteJouer;
-    private Joueur joueur1;
-    private Joueur joueur2;
-    private Div dernièreCarteJouer;
     private CardContainerAttackComponent malus;
+
+    private CardContainerLimitSpeedComponent limiteVitesse;
     private Div bottes;
     private int cpt_bot=0;
 
-    public PlayerComponent(Joueur joueur1, Joueur joueur2){
+    public PlayerComponent(Joueur joueur){
         this.setId("infoJoueur");
-        this.setText("count : "+joueur.getPoints()+" player :"+joueur.getPseudo());
+        this.setText("Score : "+joueur.getPoints()+" player :"+joueur.getPseudo());
+        this.joueur = joueur;
+
         derniereCarteJouer = new Div();
         derniereCarteJouer.addClassName("cardPlayerBot");
         derniereCarteJouer.addClassName("superpose_card");
+
         malus = new CardContainerAttackComponent();
-        this.setText("count : "+joueur2.getPoints()+" player :"+joueur2.getPseudo());
-        this.joueur1 = joueur1;
-        this.joueur2 = joueur2;
-        dernièreCarteJouer = new Div();
-        dernièreCarteJouer.addClassName("cardPlayerBot");
-        malus = new CardContainerAttackComponent(joueur1, joueur2);
+        /*
         Image imageTemp = new Image("/cartes/back.png","Posez la carte attaque ici");
         imageTemp.addClassName("cardMalusPlayerLeft");
         malus.add(imageTemp);
+        */
+        limiteVitesse = new CardContainerLimitSpeedComponent();
+        /*
+        Image imageTemp2 = new Image("/cartes/back.png","Posez la carte limite vitesse ici");
+        imageTemp2.addClassName("cardMalusPlayerLeft");
+        limiteVitesse.add(imageTemp2);
+        */
         bottes = new Div();
         bottes.addClassName("cardPlayerBot");
         bottes.addClassName("superpose_card");
         bottes.setId("img_bot"+cpt_bot);
         cpt_bot++;
 
-        add(derniereCarteJouer,malus,bottes);
+        add(derniereCarteJouer, bottes, malus, limiteVitesse);
     }
 
     public Div getBottes() {

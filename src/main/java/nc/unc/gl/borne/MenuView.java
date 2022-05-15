@@ -11,7 +11,6 @@ import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import nc.unc.gl.borne.modele.Joueur;
-import nc.unc.gl.borne.services.JoueurService;
 import nc.unc.gl.borne.services.ObserverService;
 
 
@@ -21,7 +20,6 @@ public class MenuView extends VerticalLayout {
 
     Div menu;
     private ObserverService observer;
-    private Joueur joueur;
 
     private Dialog dialog = new Dialog();
     private final TextField pseudo;
@@ -75,10 +73,8 @@ public class MenuView extends VerticalLayout {
 
     public void initPartie(){
         String name = pseudo.getValue();
-        joueur = new Joueur(name);
+        Joueur joueur = new Joueur(name);
         observer = new ObserverService(joueur);
-
-        System.out.println(observer.getAllSessions());
 
         while (ObserverService.getAllSessions().size() < 2){
             try {

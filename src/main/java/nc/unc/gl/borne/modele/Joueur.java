@@ -7,7 +7,7 @@ public class Joueur {
 
     public String pseudo;
 
-    public boolean peutJouer = false;
+    public boolean peutJouer;
 
     public int points = 0;
 
@@ -20,7 +20,6 @@ public class Joueur {
 
 
     public Joueur( String pseudo) {
-
         this.pseudo = pseudo;
         this.points = 0;
         this.main = new ArrayList<Carte>();
@@ -28,10 +27,7 @@ public class Joueur {
         this.demarre=false;
         this.attaque = null;
         this.vitesse = null;
-    }
-
-    public boolean isPeutJouer() {
-        return peutJouer;
+        this.peutJouer = false;
     }
 
     public void setPeutJouer(boolean peutJouer) {
@@ -44,7 +40,6 @@ public class Joueur {
         return pseudo;
     }
     public int getPoints() {
-
         return points;
     }
     public ArrayList<Carte> getMain() {
@@ -97,12 +92,11 @@ public class Joueur {
             + " , peutJouer= " + peutJouer;
     }
 
-
     public void ecrireMain() {
         System.out.print("Contenu de la main: [ ");
         int i = 0;
         for (i = 0; i < this.getMain().size() - 1; i++) {
-            System.out.print("Carte n°" + i + " : " + this.getMain().get(i)
+                System.out.print("Carte n°" + i + " : " + this.getMain().get(i)
                 + ", ");
         }
         System.out

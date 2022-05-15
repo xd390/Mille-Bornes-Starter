@@ -1,12 +1,14 @@
 package nc.unc.gl.borne.services;
 
 import com.vaadin.flow.component.UI;
+import nc.unc.gl.borne.Plateau;
 import nc.unc.gl.borne.modele.Carte;
 import nc.unc.gl.borne.modele.Deck;
 import nc.unc.gl.borne.modele.Joueur;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
+
 
 public class ObserverService {
     public static Deck deck = new Deck();
@@ -17,19 +19,25 @@ public class ObserverService {
     private static boolean check = false;
 
     public ObserverService(Joueur joueur){
-        sessions.put(getCurrent().getCsrfToken(), joueur);
+        this.sessions.put(getCurrent().getCsrfToken(), joueur);
     }
 
     public static void finTour(){
-        Joueur j1 = getCurrentJoueur();
-        Joueur j2 = getCurrentAutreJoueur();
-
-        j1.setPeutJouer(false);
-        j2.setPeutJouer(true);
+        getCurrentJoueur().setPeutJouer(false);
+        getCurrentAutreJoueur().setPeutJouer(true);
+    }
+    public static void finPartie(String message){
+        getCurrentJoueur().setPeutJouer(false);
+        getCurrentAutreJoueur().setPeutJouer(false);
+        Plateau.showDialog(message);
     }
 
     public UI getCurrent() {
         return UI.getCurrent();
+    }
+
+    public static Deck getDeck(){
+        return deck;
     }
 
     public static Joueur getCurrentJoueur(){
@@ -67,23 +75,38 @@ public class ObserverService {
 
         Joueur j1 = getCurrentJoueur();
         Joueur j2 = getCurrentAutreJoueur();
+        j1.setPeutJouer(true);
 
         deckService.distribuerMain(deck, j1, j2);
 
-        j1.setPeutJouer(true);
-        System.out.println(sessions);
         /*
         listeJoueur.add(j1);
         listeJoueur.add(j2);
         listeJoueur.get(new Random().nextInt(res.length)).setPeutJouer(true);
         */
     }
-    public static boolean ActionJoueur(Carte carte){
-        boolean isValid = carteService.jouerCarte(carte, getJoueur(UI.getCurrent().getCsrfToken()),getCurrentAutreJoueur());
+    public static boolean ActionJoueur(Carte carte, String action){
+        boolean isValid = false;
+        System.out.println(carte + " " + action);
+        if (action == "play") {
+            isValid = carteService.jouerCarte(carte, getCurrentJoueur(), getCurrentAutreJoueur());
+        }
+        else if (action == "delete") {
+            JoueurService.defausserCarte(carte, getCurrentJoueur());
+            isValid = true;
+        }
+        System.out.println(getCurrentJoueur());
         if (deck.size() == 0){
-            finPartie();
+            finPartie("Fin de partie! Il n'y a plus de cartes!");
             return false;
         }
+        if (getCurrentJoueur().getPoints() == 1000){
+            finPartie("Fin de partie! Bravo au joueur " + getCurrentJoueur().getPseudo());
+        }
+        if (isValid){
+            finTour();
+        }
+        System.out.println(getCurrentJoueur());
         return isValid;
     }
     public static Map<String, Joueur> getAllSessions(){return sessions;}
