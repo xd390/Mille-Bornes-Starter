@@ -4,15 +4,15 @@ package nc.unc.gl.borne;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.dependency.StyleSheet;
 import com.vaadin.flow.component.html.*;
-import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
-import nc.unc.gl.borne.gui.component.CardComponent;
-import nc.unc.gl.borne.gui.component.CardContainerComponent;
-import nc.unc.gl.borne.gui.component.PoubelleContainerComponent;
-import nc.unc.gl.borne.gui.component.PlayerComponent;
+import nc.unc.gl.borne.gui.component.*;
+import nc.unc.gl.borne.gui.component.normal.CardComponent;
+import nc.unc.gl.borne.gui.component.normal.CardContainerComponent;
+import nc.unc.gl.borne.gui.component.parade.CardParadeConpoment;
+import nc.unc.gl.borne.gui.component.parade.CardParadeLimitVitesseComponent;
 import nc.unc.gl.borne.modele.Joueur;
 import nc.unc.gl.borne.services.JoueurService;
 import nc.unc.gl.borne.services.ObserverService;
@@ -27,6 +27,7 @@ import static nc.unc.gl.borne.services.ObserverService.getCurrentJoueur;
 public class Plateau extends VerticalLayout {
         private final HorizontalLayout playerLeft;
         private final HorizontalLayout middleZone;
+         private final HorizontalLayout upperZone;
         private final HorizontalLayout footerZone;
         public static Joueur joueur2;
         private final Div divJoueur1=new Div();
@@ -41,6 +42,12 @@ public class Plateau extends VerticalLayout {
         // poubelle.addClassName("size_trash");
         // divPoubelle.addClassName("trash");
         // divPoubelle.add(poubelle);
+
+        upperZone = new HorizontalLayout();
+        CardParadeConpoment p1 = new CardParadeConpoment();
+        CardParadeLimitVitesseComponent p2 = new CardParadeLimitVitesseComponent();
+        upperZone.addClassName("containerDepotCarteUpper");
+        upperZone.add(p1, p2);
 
         middleZone = new HorizontalLayout();
         PoubelleContainerComponent poubelle = new PoubelleContainerComponent("Defausse");
@@ -75,7 +82,7 @@ public class Plateau extends VerticalLayout {
         piocheCarte.add(buttonPioche);
         piocheCarte.addClickListener(buttonClickEvent -> piocherCarte());
 
-        add(playerLeft,middleZone,footerZone);
+        add(playerLeft,upperZone, middleZone,footerZone);
         add(piocheCarte);
         ajouterCarteDebut();
     }
@@ -89,7 +96,6 @@ public class Plateau extends VerticalLayout {
         dialog.setWidth("50%");
         dialog.open();
     }
-
 
     public void piocherCarte(){
         int nbCartes = getCurrentJoueur().getMain().size();
