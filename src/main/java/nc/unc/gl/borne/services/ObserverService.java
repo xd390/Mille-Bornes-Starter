@@ -26,8 +26,10 @@ public class ObserverService {
         getCurrentJoueur().setPeutJouer(false);
         getCurrentAutreJoueur().setPeutJouer(true);
     }
-    public static void finPartie(){
-        Plateau.showDialog("Fin de partie!");
+    public static void finPartie(String message){
+        getCurrentJoueur().setPeutJouer(false);
+        getCurrentAutreJoueur().setPeutJouer(false);
+        Plateau.showDialog(message);
     }
 
     public UI getCurrent() {
@@ -85,8 +87,8 @@ public class ObserverService {
     }
     public static boolean ActionJoueur(Carte carte, String action){
         boolean isValid = false;
-        System.out.println(action);
-        if (action == "jouer") {
+        System.out.println(carte + " " + action);
+        if (action == "play") {
             isValid = carteService.jouerCarte(carte, getCurrentJoueur(), getCurrentAutreJoueur());
         }
         else if (action == "delete") {
@@ -95,8 +97,11 @@ public class ObserverService {
         }
         System.out.println(getCurrentJoueur());
         if (deck.size() == 0){
-            finPartie();
+            finPartie("Fin de partie! Il n'y a plus de cartes!");
             return false;
+        }
+        if (getCurrentJoueur().getPoints() == 1000){
+            finPartie("Fin de partie! Bravo au joueur " + getCurrentJoueur().getPseudo());
         }
         if (isValid){
             finTour();
