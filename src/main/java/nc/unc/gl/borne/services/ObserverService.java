@@ -34,7 +34,7 @@ public class ObserverService {
     }
 
     public UI getCurrent() {
-        return ui.getCurrent();
+        return UI.getCurrent();
     }
 
     public static Joueur getJoueur(String key) {
@@ -73,7 +73,7 @@ public class ObserverService {
     }
     public static boolean ActionJoueur(Carte carte,String nomJoueur){
         boolean isValid = carteService.jouerCarte(carte,getJoueur(nomJoueur),getAutreJoueur(nomJoueur));
-        if (isValid && deck.size() == 0){
+        if (deck.size() == 0){
             finPartie();
             return false;
         }
