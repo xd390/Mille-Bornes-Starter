@@ -23,12 +23,12 @@ public class CardContainerAttackComponent extends Div implements DropTarget<Card
                         // component was dragged from the same UI as the drop target
                         Carte res = (Carte) data;
                         if(0 == res.getType()){
-                            CardComponent res2 = (CardComponent) e.getDragSourceComponent().get();
-                            res2.getImage().removeClassName("size_of_card_player");
-                            res2.getImage().removeClassName("space_between_img");
-                            res2.getImage().addClassName("cardMalusPlayerLeft");
-                            this.add(res2.getImage());
-                            // TODO appeler le service et faire jouer la carte
+                            CardComponent carte = (CardComponent) e.getDragSourceComponent().get();
+                            carte.getImage().removeClassName("size_of_card_player");
+                            carte.getImage().removeClassName("space_between_img");
+                            carte.getImage().addClassName("cardMalusPlayerLeft");
+                            this.add(carte.getImage());
+
                         }
                         else{
                             Notification.show("Cette carte ne correspond au container");

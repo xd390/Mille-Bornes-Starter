@@ -1,20 +1,21 @@
 package nc.unc.gl.borne.services;
 
 import com.vaadin.flow.component.UI;
+import nc.unc.gl.borne.modele.Carte;
 import nc.unc.gl.borne.modele.Deck;
 import nc.unc.gl.borne.modele.Joueur;
 
-import java.util.Collection;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class ObserverService {
     private UI ui = new UI();
     public static Deck deck = new Deck();
+    private static final CarteService carteService = new CarteService();
     private static final DeckService deckService = new DeckService();
+    private static final JoueurService joueurService = new JoueurService();
     private final static Map<String, Joueur> sessions = new ConcurrentHashMap<>();
-
+    private static List<Joueur> listeJoueur = new ArrayList<>();
     private static boolean check = false;
 
     private Joueur joueur;
@@ -69,7 +70,14 @@ public class ObserverService {
         Joueur j1 = (Joueur) res[0];
         Joueur j2 = (Joueur) res[1];
         deckService.distribuerMain(deck, j1, j2);
+        listeJoueur.add(j1);
+        listeJoueur.add(j2);
+        listeJoueur.get(new Random().nextInt(res.length)).setPeutJouer(true);
+
         check = true;
+    }
+    public static boolean ActionJoueur(Carte carte,String nomJoueur){
+        return carteService.jouerCarte(carte,getJoueur(nomJoueur),getAutreJoueur(nomJoueur));
     }
     public static Map<String, Joueur> getAllSessions(){return sessions;}
 }

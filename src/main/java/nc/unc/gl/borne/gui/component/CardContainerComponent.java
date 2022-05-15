@@ -6,6 +6,8 @@ import com.vaadin.flow.component.dnd.DropTarget;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.notification.Notification;
 import nc.unc.gl.borne.modele.Carte;
+import nc.unc.gl.borne.services.JoueurService;
+import nc.unc.gl.borne.services.ObserverService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +19,7 @@ public class CardContainerComponent extends Div implements DropTarget<CardCompon
         private int effet;
         private int cpt=0;
         private boolean carteSpecifique;
+        private final JoueurService joueurService = new JoueurService();
         // TODO enlever les commentaires devant. private Joueur joueur;
         public CardContainerComponent(int type, int effet, String nameContainer, Boolean carteSpecifique){
             this.carteSpecifique = carteSpecifique;
@@ -32,17 +35,21 @@ public class CardContainerComponent extends Div implements DropTarget<CardCompon
                     e.getDragData().ifPresent(data -> {
                         // the server side drag data is available if it has been set and the
                         // component was dragged from the same UI as the drop target
-                        Carte res = (Carte) data;
-                        if(type == res.getType() && effet == res.getEffet() | carteSpecifique && type == res.getType()){
-                            CardComponent res2 = (CardComponent) e.getDragSourceComponent().get();
-                            res2.getImage().removeClassName("size_of_card_player");
-                            res2.getImage().removeClassName("space_between_img");
-                            res2.getImage().addClassName("size_of_depository_card");
-                            res2.getImage().addClassName("superpose_card");
-                            res2.getImage().setId("img_"+cpt);
-                            cpt++;
-                            this.add(res2.getImage());
-                            // TODO appeler le service et faire jouer la carte
+                        Carte carte = (Carte) data;
+                        if(type == carte.getType() && effet == carte.getEffet() | carteSpecifique && type == carte.getType()){
+                            if(ObserverService.ActionJoueur(carte, JoueurService.getNomJoueur())) {
+                                CardComponent card = (CardComponent) e.getDragSourceComponent().get();
+                                card.getImage().removeClassName("size_of_card_player");
+                                card.getImage().removeClassName("space_between_img");
+                                card.getImage().addClassName("size_of_depository_card");
+                                card.getImage().addClassName("superpose_card");
+                                card.getImage().setId("img_" + cpt);
+                                cpt++;
+                                this.add(card.getImage());
+                            }
+                            else{
+                                Notification.show("Vous ne pouvez pas jouer cette carte ou ce n'est pas votre tour");
+                            }
                         }
                         else{
                             Notification.show("Cette carte ne correspond au container");
