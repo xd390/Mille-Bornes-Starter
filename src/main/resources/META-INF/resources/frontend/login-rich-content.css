@@ -166,4 +166,13 @@
     left: 5px;
 }
 
+.size_trash{
+    width:20%;
+}
+.trash{
+    position:absolute;
+    bottom:0;
+    right:5px;
+}
+
 
