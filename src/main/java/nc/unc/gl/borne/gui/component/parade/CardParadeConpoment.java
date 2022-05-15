@@ -4,6 +4,7 @@ import com.vaadin.flow.component.HasStyle;
 import com.vaadin.flow.component.dnd.DropEffect;
 import com.vaadin.flow.component.dnd.DropTarget;
 import com.vaadin.flow.component.html.Div;
+import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.notification.Notification;
 import nc.unc.gl.borne.gui.component.normal.CardComponent;
@@ -15,14 +16,19 @@ import static nc.unc.gl.borne.services.ObserverService.getCurrentJoueur;
 
 public class CardParadeConpoment extends Div implements DropTarget<CardComponent>, HasStyle {
 
-    public static void setAttaque(Carte carte){
-
-    }
     private Div div;
+
+    public void setAttaque(Carte carte) {
+        div.removeAll();
+        Image image = new Image(carte.getImageNom(), "Attaque");
+        image.addClassName("size_of_depository_card");
+        image.addClassName("superpose_card");
+        div.add(image);
+    }
     public CardParadeConpoment(){
         div = new Div();
         div.addClassName("rectangle");
-        this.add(new Span("Contre attaque"),div);
+        this.add(new Span("Contre attaque"), div);
         this.setActive(true);
         this.setDropEffect(DropEffect.MOVE);
         this.addDropListener(e ->{

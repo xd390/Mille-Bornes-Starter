@@ -4,6 +4,7 @@ import com.vaadin.flow.component.HasStyle;
 import com.vaadin.flow.component.dnd.DropEffect;
 import com.vaadin.flow.component.dnd.DropTarget;
 import com.vaadin.flow.component.html.Div;
+import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.notification.Notification;
 import nc.unc.gl.borne.gui.component.normal.CardComponent;
@@ -14,11 +15,16 @@ import static nc.unc.gl.borne.services.ObserverService.getCurrentJoueur;
 
 public class CardParadeLimitVitesseComponent extends Div implements DropTarget<CardComponent>, HasStyle {
 
-    public static void setAttaque(Carte carte){
+    private Div div;
 
+    public void setAttaque(Carte carte) {
+        div.removeAll();
+        Image image = new Image(carte.getImageNom(), "Limite de vitesse");
+        image.addClassName("size_of_depository_card");
+        image.addClassName("superpose_card");
+        div.add(image);
     }
 
-    private Div div;
     public CardParadeLimitVitesseComponent(){
         div = new Div();
         div.addClassName("rectangle");
@@ -40,7 +46,7 @@ public class CardParadeLimitVitesseComponent extends Div implements DropTarget<C
                         carte.getImage().removeClassName("space_between_img");
                         carte.getImage().addClassName("size_of_depository_card");
                         carte.getImage().addClassName("superpose_card");
-                        this.add(carte.getImage());
+                        div.add(carte.getImage());
                     }
                     else{
                         Notification.show("Cette carte ne correspond au container");

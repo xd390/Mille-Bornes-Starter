@@ -2,6 +2,7 @@ package nc.unc.gl.borne;
 
 
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.dependency.StyleSheet;
 import com.vaadin.flow.component.html.*;
 import com.vaadin.flow.component.notification.Notification;
@@ -13,7 +14,6 @@ import nc.unc.gl.borne.gui.component.normal.CardComponent;
 import nc.unc.gl.borne.gui.component.normal.CardContainerComponent;
 import nc.unc.gl.borne.gui.component.parade.CardParadeConpoment;
 import nc.unc.gl.borne.gui.component.parade.CardParadeLimitVitesseComponent;
-import nc.unc.gl.borne.modele.Joueur;
 import nc.unc.gl.borne.services.JoueurService;
 import nc.unc.gl.borne.services.ObserverService;
 import com.vaadin.flow.component.dialog.Dialog;
@@ -29,23 +29,25 @@ public class Plateau extends VerticalLayout {
         private final HorizontalLayout middleZone;
          private final HorizontalLayout upperZone;
         private final HorizontalLayout footerZone;
-        public static Joueur joueur2;
+
         private final Div divJoueur1=new Div();
         private final Div divPoubelle=new Div();
+
+        private CardParadeConpoment p1;
+        private CardParadeLimitVitesseComponent p2;
+        PlayerComponent playerComponent;
 
         private H1 infoJ1;
 
     public Plateau() {
-        joueur2 = getCurrentAutreJoueur();
-
         // Image poubelle = new Image("Images/poubelle.png","poubelle");
         // poubelle.addClassName("size_trash");
         // divPoubelle.addClassName("trash");
         // divPoubelle.add(poubelle);
 
         upperZone = new HorizontalLayout();
-        CardParadeConpoment p1 = new CardParadeConpoment();
-        CardParadeLimitVitesseComponent p2 = new CardParadeLimitVitesseComponent();
+        p1 = new CardParadeConpoment();
+        p2 = new CardParadeLimitVitesseComponent();
         upperZone.addClassName("containerDepotCarteUpper");
         upperZone.add(p1, p2);
 
@@ -63,7 +65,8 @@ public class Plateau extends VerticalLayout {
 
         playerLeft = new HorizontalLayout();
         playerLeft.addClassName("playerRight");
-        PlayerComponent playerComponent = new PlayerComponent(getCurrentAutreJoueur());
+
+        playerComponent = new PlayerComponent(getCurrentAutreJoueur());
         playerComponent.addClassName("style_txt");
         playerLeft.add(playerComponent);
 
@@ -79,6 +82,8 @@ public class Plateau extends VerticalLayout {
         Div piocheCarte=new Div();
         piocheCarte.setId("piocheCarte");
         Button buttonPioche = new Button("Pioche");
+        buttonPioche.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
+        buttonPioche.addThemeVariants(ButtonVariant.LUMO_LARGE);
         piocheCarte.add(buttonPioche);
         piocheCarte.addClickListener(buttonClickEvent -> piocherCarte());
 
@@ -98,8 +103,16 @@ public class Plateau extends VerticalLayout {
     }
 
     public void piocherCarte(){
-        infoJ1.setText("Score : "+String.valueOf(getCurrentJoueur().getPoints())+" player : "+getCurrentJoueur().getPseudo());
+        infoJ1.setText("Score : "+String.valueOf(getCurrentJoueur().getPoints())+" player : "+getCurrentJoueur().getPseudo() + "Your turn : " + getCurrentJoueur().getPeutJouer());
+        playerComponent.setInfoJ2("Score : "+getCurrentAutreJoueur().getPoints()+" player :"+getCurrentAutreJoueur().getPseudo());
+        if (getCurrentJoueur().getAttaque() != null)
+            p1.setAttaque(getCurrentJoueur().getAttaque());
+
+        if (getCurrentJoueur().getVitesse() != null)
+            p2.setAttaque(getCurrentJoueur().getVitesse());
+
         int nbCartes = getCurrentJoueur().getMain().size();
+
         if (!getCurrentJoueur().getPeutJouer()){
             Notification.show("Ce n'est pas votre tour!");
         }

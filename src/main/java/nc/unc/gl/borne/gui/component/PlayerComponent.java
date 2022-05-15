@@ -2,10 +2,13 @@ package nc.unc.gl.borne.gui.component;
 
 import com.vaadin.flow.component.HasStyle;
 import com.vaadin.flow.component.html.Div;
+import com.vaadin.flow.component.html.H4;
 import com.vaadin.flow.component.html.Image;
 import nc.unc.gl.borne.gui.component.attaques.CardContainerAttackComponent;
 import nc.unc.gl.borne.gui.component.attaques.CardContainerLimitSpeedComponent;
 import nc.unc.gl.borne.modele.Joueur;
+
+import static nc.unc.gl.borne.services.ObserverService.getCurrentAutreJoueur;
 
 public class PlayerComponent extends Div implements HasStyle {
     private Joueur joueur;
@@ -16,9 +19,19 @@ public class PlayerComponent extends Div implements HasStyle {
     private Div bottes;
     private int cpt_bot=0;
 
+    private H4 infoJ2;
+
+    public H4 getInfoJ2() {
+        return this.infoJ2;
+    }
+
+    public void setInfoJ2(String infoJ2) {
+        this.infoJ2.setText(infoJ2);
+    }
+
     public PlayerComponent(Joueur joueur){
         this.setId("infoJoueur");
-        this.setText("Score : "+joueur.getPoints()+" player :"+joueur.getPseudo());
+        infoJ2 = new H4("Score : "+getCurrentAutreJoueur().getPoints()+" player :"+getCurrentAutreJoueur().getPseudo());
         this.joueur = joueur;
 
         derniereCarteJouer = new Div();
@@ -41,7 +54,7 @@ public class PlayerComponent extends Div implements HasStyle {
         bottes.setId("img_bot"+cpt_bot);
         cpt_bot++;
 
-        add(derniereCarteJouer, malus, limiteVitesse ,bottes );
+        add(infoJ2, derniereCarteJouer, malus, limiteVitesse ,bottes );
     }
 
     public Div getBottes() {

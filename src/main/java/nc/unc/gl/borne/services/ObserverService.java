@@ -102,7 +102,7 @@ public class ObserverService {
         if (getCurrentJoueur().getPoints() == 1000){
             finPartie("Fin de partie! Bravo au joueur " + getCurrentJoueur().getPseudo());
         }
-        if (isValid){
+        if (isValid && carte.getType() != 2){
             finTour();
         }
         return isValid;

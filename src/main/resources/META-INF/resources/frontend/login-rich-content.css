@@ -1,3 +1,10 @@
+body{
+    background: #307D99 url('../Images/background.jpg');
+    /* background-position: 12% 83%; */
+    background-size: cover;
+
+}
+
 .footer {
     text-align: center;
     position: fixed;
@@ -43,7 +50,7 @@
 
 }
 .rectangle {
-    border:3px solid darkgray;
+    border:3px solid black;
     width: 60%;
     height: 200px;
     color: rgba(0, 0, 0, 0.3);
