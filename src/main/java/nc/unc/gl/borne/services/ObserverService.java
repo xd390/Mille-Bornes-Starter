@@ -1,6 +1,7 @@
 package nc.unc.gl.borne.services;
 
 import com.vaadin.flow.component.UI;
+import nc.unc.gl.borne.Plateau;
 import nc.unc.gl.borne.modele.Carte;
 import nc.unc.gl.borne.modele.Deck;
 import nc.unc.gl.borne.modele.Joueur;
@@ -30,6 +31,9 @@ public class ObserverService {
 
         j1.setPeutJouer(false);
         j2.setPeutJouer(true);
+    }
+    public static void finPartie(){
+        Plateau.showDialog("Fin de partie!");
     }
 
     public UI getCurrent() {
@@ -71,7 +75,12 @@ public class ObserverService {
         check = true;
     }
     public static boolean ActionJoueur(Carte carte,String nomJoueur){
-        return carteService.jouerCarte(carte,getJoueur(nomJoueur),getAutreJoueur(nomJoueur));
+        boolean isValid = carteService.jouerCarte(carte,getJoueur(nomJoueur),getAutreJoueur(nomJoueur));
+        if (isValid && deck.size() == 0){
+            finPartie();
+            return false;
+        }
+        return isValid;
     }
     public static Map<String, Joueur> getAllSessions(){return sessions;}
 }
