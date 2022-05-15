@@ -71,11 +71,10 @@ public class ObserverService {
 
         Joueur j1 = getCurrentJoueur();
         Joueur j2 = getCurrentAutreJoueur();
+        j1.setPeutJouer(true);
 
         deckService.distribuerMain(deck, j1, j2);
 
-        j1.setPeutJouer(true);
-        System.out.println(sessions);
         /*
         listeJoueur.add(j1);
         listeJoueur.add(j2);
@@ -83,11 +82,15 @@ public class ObserverService {
         */
     }
     public static boolean ActionJoueur(Carte carte){
-        boolean isValid = carteService.jouerCarte(carte, getJoueur(UI.getCurrent().getCsrfToken()),getCurrentAutreJoueur());
+        boolean isValid = carteService.jouerCarte(carte, getCurrentJoueur(), getCurrentAutreJoueur());
         if (deck.size() == 0){
             finPartie();
             return false;
         }
+        if (isValid){
+            finTour();
+        }
+        System.out.println(getCurrentJoueur());
         return isValid;
     }
     public static Map<String, Joueur> getAllSessions(){return sessions;}
