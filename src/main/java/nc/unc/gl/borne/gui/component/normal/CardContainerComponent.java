@@ -1,19 +1,17 @@
-package nc.unc.gl.borne.gui.component;
+package nc.unc.gl.borne.gui.component.normal;
 
 import com.vaadin.flow.component.HasStyle;
 import com.vaadin.flow.component.dnd.DropEffect;
 import com.vaadin.flow.component.dnd.DropTarget;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.notification.Notification;
+import nc.unc.gl.borne.gui.component.normal.CardComponent;
 import nc.unc.gl.borne.modele.Carte;
-import nc.unc.gl.borne.services.JoueurService;
 import nc.unc.gl.borne.services.ObserverService;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
-import static nc.unc.gl.borne.services.ObserverService.getCurrentAutreJoueur;
 import static nc.unc.gl.borne.services.ObserverService.getCurrentJoueur;
 
 public class CardContainerComponent extends Div implements DropTarget<CardComponent>, HasStyle {
