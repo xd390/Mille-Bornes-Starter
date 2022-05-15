@@ -77,7 +77,7 @@ public class ObserverService {
         check = true;
     }
     public static boolean ActionJoueur(Carte carte,String nomJoueur){
-        return carteService.jouerCarte(carte,getJoueur(nomJoueur),getAutreJoueur(nomJoueur));
+         return carteService.jouerCarte(carte,getJoueur(nomJoueur),getAutreJoueur(nomJoueur));
     }
     public static Map<String, Joueur> getAllSessions(){return sessions;}
 }

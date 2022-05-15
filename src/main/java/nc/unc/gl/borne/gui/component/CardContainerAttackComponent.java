@@ -6,13 +6,14 @@ import com.vaadin.flow.component.dnd.DropTarget;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.notification.Notification;
 import nc.unc.gl.borne.modele.Carte;
-
-import java.util.ArrayList;
-import java.util.List;
+import nc.unc.gl.borne.modele.Joueur;
 
 public class CardContainerAttackComponent extends Div implements DropTarget<CardComponent>, HasStyle {
-        // TODO enlever les commentaires devant. private Joueur joueur;
-        public CardContainerAttackComponent(){
+        private final Joueur joueur1;
+        private final Joueur joueur2;
+        public CardContainerAttackComponent(Joueur joueur1, Joueur joueur2){
+            this.joueur1 = joueur1;
+            this.joueur2 = joueur2;
             this.setActive(true);
             this.setDropEffect(DropEffect.MOVE);
             this.addDropListener(e ->{

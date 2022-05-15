@@ -1,26 +1,25 @@
 package nc.unc.gl.borne.gui.component;
 
 import com.vaadin.flow.component.HasStyle;
-import com.vaadin.flow.component.dnd.DropEffect;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Image;
-import com.vaadin.flow.component.notification.Notification;
-import nc.unc.gl.borne.modele.Carte;
 import nc.unc.gl.borne.modele.Joueur;
 
 public class PlayerComponent extends Div implements HasStyle {
-    private Joueur joueur;
+    private Joueur joueur1;
+    private Joueur joueur2;
     private Div dernièreCarteJouer;
     private CardContainerAttackComponent malus;
     private Div bottes;
 
-    public PlayerComponent(Joueur joueur){
+    public PlayerComponent(Joueur joueur1, Joueur joueur2){
         this.setId("infoJoueur");
-        this.setText("count : "+joueur.getPoints()+" player :"+joueur.getPseudo());
-        this.joueur = joueur;
+        this.setText("count : "+joueur2.getPoints()+" player :"+joueur2.getPseudo());
+        this.joueur1 = joueur1;
+        this.joueur2 = joueur2;
         dernièreCarteJouer = new Div();
         dernièreCarteJouer.addClassName("cardPlayerBot");
-        malus = new CardContainerAttackComponent();
+        malus = new CardContainerAttackComponent(joueur1, joueur2);
         Image imageTemp = new Image("/cartes/back.png","Posez la carte attaque ici");
         imageTemp.addClassName("cardMalusPlayerLeft");
         malus.add(imageTemp);
@@ -43,6 +42,6 @@ public class PlayerComponent extends Div implements HasStyle {
     }
 
     public Joueur getJoueur() {
-        return joueur;
+        return joueur1;
     }
 }

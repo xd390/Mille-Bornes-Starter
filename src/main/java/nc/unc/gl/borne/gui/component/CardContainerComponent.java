@@ -6,12 +6,12 @@ import com.vaadin.flow.component.dnd.DropTarget;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.notification.Notification;
 import nc.unc.gl.borne.modele.Carte;
+import nc.unc.gl.borne.modele.Joueur;
 import nc.unc.gl.borne.services.JoueurService;
 import nc.unc.gl.borne.services.ObserverService;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 public class CardContainerComponent extends Div implements DropTarget<CardComponent>, HasStyle {
         public List<CardComponent> cartes = new ArrayList<>();
@@ -20,9 +20,10 @@ public class CardContainerComponent extends Div implements DropTarget<CardCompon
         private int cpt=0;
         private boolean carteSpecifique;
         private final JoueurService joueurService = new JoueurService();
-        // TODO enlever les commentaires devant. private Joueur joueur;
-        public CardContainerComponent(int type, int effet, String nameContainer, Boolean carteSpecifique){
+        private Joueur joueur;
+        public CardContainerComponent(int type, int effet, String nameContainer, Boolean carteSpecifique, Joueur joueur){
             this.carteSpecifique = carteSpecifique;
+            this.joueur = joueur;
             this.setActive(true);
             this.type = type;
             this.effet = effet;
@@ -37,7 +38,7 @@ public class CardContainerComponent extends Div implements DropTarget<CardCompon
                         // component was dragged from the same UI as the drop target
                         Carte carte = (Carte) data;
                         if(type == carte.getType() && effet == carte.getEffet() | carteSpecifique && type == carte.getType()){
-                            if(ObserverService.ActionJoueur(carte, JoueurService.getNomJoueur())) {
+                            if(ObserverService.ActionJoueur(carte, joueur.getPseudo())) {
                                 CardComponent card = (CardComponent) e.getDragSourceComponent().get();
                                 card.getImage().removeClassName("size_of_card_player");
                                 card.getImage().removeClassName("space_between_img");
