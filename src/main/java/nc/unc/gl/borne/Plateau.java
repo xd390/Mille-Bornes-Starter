@@ -23,10 +23,12 @@ public class Plateau extends VerticalLayout {
         private final HorizontalLayout playerLeft;
         private final HorizontalLayout middleZone;
         private final HorizontalLayout footerZone;
+        private final Joueur joueur1;
+        private final Joueur joueur2;
 
     public Plateau() {
-        Joueur joueur1 = ObserverService.getJoueur(JoueurService.getNomJoueur());
-        Joueur joueur2 = ObserverService.getAutreJoueur(JoueurService.getNomJoueur());
+        joueur1 = ObserverService.getJoueur(JoueurService.getNomJoueur());
+        joueur2 = ObserverService.getAutreJoueur(JoueurService.getNomJoueur());
 
         middleZone = new HorizontalLayout();
         CardContainerComponent r1 = new CardContainerComponent(3,1,"25",false);
@@ -34,35 +36,18 @@ public class Plateau extends VerticalLayout {
         CardContainerComponent r3 = new CardContainerComponent(3,3,"75",false);
         CardContainerComponent r4 = new CardContainerComponent(3,4,"100",false);
         CardContainerComponent r5 = new CardContainerComponent(3,5,"200",false);
+        CardContainerComponent r6 = new CardContainerComponent(1,1,"feu vert",false);
+        CardContainerComponent r7 = new CardContainerComponent(2,0,"botte",true);
         middleZone.addClassName("containerDepotCarte");
-        middleZone.add(r1,r2,r3,r4,r5);
+        middleZone.add(r1,r2,r3,r4,r5,r6,r7);
 
 
         playerLeft = new HorizontalLayout();
         playerLeft.addClassName("playerRight");
-        Image imgJoueur=new Image("/cartes/attaque_vitesse.jpeg","carte");
-        Image imgJoueurMalus=new Image("/cartes/attaque_feu.jpeg","carte");
-        Image imgJoueurBot=new Image("/cartes/botte_accident.jpeg","carte");
-
-        imgJoueur.addClassName("size_of_card_right_player");
-        imgJoueurMalus.addClassName("size_of_card_right_player");
-        imgJoueurBot.addClassName("size_of_card_right_player");
-
-        // joueur2 = new Joueur("toto");
         PlayerComponent playerComponent = new PlayerComponent(joueur2);
-        playerComponent.getDernièreCarteJouer().add(imgJoueur);
-        playerComponent.getMalus().add(imgJoueurMalus);
-        playerComponent.getBottes().add(imgJoueurBot);
         playerLeft.add(playerComponent);
 
         footerZone = new HorizontalLayout();
-
-        Carte carte1 = new Carte(3,1);
-        Carte carte2 = new Carte(3,1);
-        CardComponent carteComponent1 = new CardComponent(carte1);
-        CardComponent carteComponent2 = new CardComponent(carte2);
-
-        footerZone.add(carteComponent1,carteComponent2);
         footerZone.addClassName("footer");
 
         Div piocheCarte=new Div();
@@ -72,6 +57,12 @@ public class Plateau extends VerticalLayout {
 
         add(playerLeft,middleZone,footerZone);
         add(piocheCarte);
+        ajouterCarteDebut();
+    }
+    private void ajouterCarteDebut(){
+        for(int i=0;i< joueur1.getMain().size();i++){
+            footerZone.add(new CardComponent(joueur1.getMain().get(i)));
+        }
     }
 
 }

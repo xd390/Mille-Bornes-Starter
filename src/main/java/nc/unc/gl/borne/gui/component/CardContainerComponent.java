@@ -42,8 +42,6 @@ public class CardContainerComponent extends Div implements DropTarget<CardCompon
                             res2.getImage().setId("img_"+cpt);
                             cpt++;
                             this.add(res2.getImage());
-                            this.removeClassName("rectangle");
-                            this.addClassName("container_with_card");
                             // TODO appeler le service et faire jouer la carte
                         }
                         else{
@@ -54,4 +52,15 @@ public class CardContainerComponent extends Div implements DropTarget<CardCompon
             });
         }
 
+    public int getType() {
+        return type;
+    }
+
+    public int getEffet() {
+        return effet;
+    }
+
+    public boolean isCarteSpecifique() {
+        return carteSpecifique;
+    }
 }
