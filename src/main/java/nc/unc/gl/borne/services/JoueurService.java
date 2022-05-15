@@ -24,13 +24,13 @@ public class JoueurService {
 
     }
 
-    public static void attaquer(Carte carteAttaque, Joueur joueur , Joueur joueurAttaqué) {
-        joueurAttaqué.setAttaque(carteAttaque);
+    public static void attaquer(Carte carteAttaque, Joueur joueur , Joueur receiveAttaque) {
+        receiveAttaque.setAttaque(carteAttaque);
         joueur.main.remove(carteAttaque);
     }
 
-    public static void poserLimiteVitesse(Carte carteAttaque, Joueur joueur , Joueur joueurAttaqué) {
-        joueurAttaqué.setVitesse(carteAttaque);
+    public static void poserLimiteVitesse(Carte carteAttaque, Joueur joueur , Joueur receiveAttaque) {
+        receiveAttaque.setVitesse(carteAttaque);
         joueur.main.remove(carteAttaque);
     }
 
