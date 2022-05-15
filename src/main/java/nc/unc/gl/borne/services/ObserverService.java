@@ -17,11 +17,8 @@ public class ObserverService {
     private static List<Joueur> listeJoueur = new ArrayList<>();
     private static boolean check = false;
 
-    private Joueur joueur;
-
     public ObserverService(Joueur joueur){
-        this.joueur = joueur;
-        sessions.put(this.joueur.getPseudo(), this.joueur);
+        sessions.put(joueur.getPseudo(), joueur);
     }
 
     public static void finTour(String nomJoueur){
@@ -71,7 +68,12 @@ public class ObserverService {
         check = true;
     }
     public static boolean ActionJoueur(Carte carte,String nomJoueur){
-         return carteService.jouerCarte(carte,getJoueur(nomJoueur),getAutreJoueur(nomJoueur));
+        boolean isValid = carteService.jouerCarte(carte,getJoueur(nomJoueur),getAutreJoueur(nomJoueur));
+        if (isValid && deck.size() == 0){
+            finPartie();
+            return false;
+        }
+        return isValid;
     }
     public static Map<String, Joueur> getAllSessions(){return sessions;}
 }

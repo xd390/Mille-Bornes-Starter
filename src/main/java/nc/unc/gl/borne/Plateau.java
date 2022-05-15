@@ -2,9 +2,8 @@ package nc.unc.gl.borne;
 
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.dependency.StyleSheet;
-import com.vaadin.flow.component.html.Div;
-import com.vaadin.flow.component.html.H1;
-import com.vaadin.flow.component.html.H2;
+import com.vaadin.flow.component.dialog.Dialog;
+import com.vaadin.flow.component.html.*;
 import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
@@ -70,6 +69,17 @@ public class Plateau extends VerticalLayout {
 
 
     }
+    public static void showDialog(String caption) {
+        VerticalLayout dialogLayout = new VerticalLayout(new Div());
+        dialogLayout.setWidth("10%");
+        dialogLayout.setMargin(false);
+        dialogLayout.setPadding(false);
+        Dialog dialog = new Dialog(new H3(caption), dialogLayout);
+        dialog.setHeight("40%");
+        dialog.setWidth("50%");
+        dialog.open();
+    }
+
     private void ajouterCarteDebut(){
         for(int i=0;i< joueur1.getMain().size();i++){
             footerZone.add(new CardComponent(joueur1.getMain().get(i)));

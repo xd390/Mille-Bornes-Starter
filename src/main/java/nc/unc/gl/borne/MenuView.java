@@ -48,9 +48,10 @@ public class MenuView extends VerticalLayout {
         add(titre);
         add(menu);
         add(dialog);
+
     }
 
-    public synchronized void showDialog(String caption) {
+    public void showDialog(String caption) {
         VerticalLayout dialogLayout = new VerticalLayout(new Div());
         dialogLayout.setWidth("10%");
         dialogLayout.setMargin(false);
@@ -62,7 +63,7 @@ public class MenuView extends VerticalLayout {
     }
 
 
-    private synchronized void jouer(){
+    private void jouer(){
         if(pseudo.getOptionalValue().isPresent()){
             // showDialog("En attente de joueurs...");
             initPartie();
@@ -72,7 +73,7 @@ public class MenuView extends VerticalLayout {
         }
     }
 
-    public synchronized void initPartie(){
+    public void initPartie(){
         String name = pseudo.getValue();
         joueur = new Joueur(name);
         observer = new ObserverService(joueur);
