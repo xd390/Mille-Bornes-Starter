@@ -98,6 +98,7 @@ public class Plateau extends VerticalLayout {
     }
 
     public void piocherCarte(){
+        infoJ1.setText("Score : "+String.valueOf(getCurrentJoueur().getPoints())+" player : "+getCurrentJoueur().getPseudo());
         int nbCartes = getCurrentJoueur().getMain().size();
         if (!getCurrentJoueur().getPeutJouer()){
             Notification.show("Ce n'est pas votre tour!");

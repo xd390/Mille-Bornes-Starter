@@ -14,6 +14,10 @@ import static nc.unc.gl.borne.services.ObserverService.getCurrentJoueur;
 
 
 public class CardParadeConpoment extends Div implements DropTarget<CardComponent>, HasStyle {
+
+    public static void setAttaque(Carte carte){
+
+    }
     private Div div;
     public CardParadeConpoment(){
         div = new Div();

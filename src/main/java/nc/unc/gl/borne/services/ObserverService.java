@@ -87,7 +87,7 @@ public class ObserverService {
     }
     public static boolean ActionJoueur(Carte carte, String action){
         boolean isValid = false;
-        System.out.println(carte + " " + action);
+
         if (action == "play") {
             isValid = carteService.jouerCarte(carte, getCurrentJoueur(), getCurrentAutreJoueur());
         }
@@ -95,7 +95,6 @@ public class ObserverService {
             JoueurService.defausserCarte(carte, getCurrentJoueur());
             isValid = true;
         }
-        System.out.println(getCurrentJoueur());
         if (deck.size() == 0){
             finPartie("Fin de partie! Il n'y a plus de cartes!");
             return false;
@@ -106,7 +105,6 @@ public class ObserverService {
         if (isValid){
             finTour();
         }
-        System.out.println(getCurrentJoueur());
         return isValid;
     }
     public static Map<String, Joueur> getAllSessions(){return sessions;}

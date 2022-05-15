@@ -102,13 +102,4 @@ public class Joueur {
         System.out
             .println("Carte n°" + i + " : " + this.getMain().get(i) + " ]");
     }
-
-
-
-
-
-
-
-
-
 }
