@@ -11,6 +11,7 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
 import nc.unc.gl.borne.gui.component.CardComponent;
 import nc.unc.gl.borne.gui.component.CardContainerComponent;
+import nc.unc.gl.borne.gui.component.PoubelleContainerComponent;
 import nc.unc.gl.borne.gui.component.PlayerComponent;
 import nc.unc.gl.borne.modele.Joueur;
 import nc.unc.gl.borne.services.JoueurService;
@@ -36,13 +37,13 @@ public class Plateau extends VerticalLayout {
     public Plateau() {
         joueur2 = getCurrentAutreJoueur();
 
-        Image poubelle=new Image("Images/poubelle.jpg","poubelle");
-        poubelle.addClassName("size_trash");
-        divPoubelle.addClassName("trash");
-        divPoubelle.add(poubelle);
+        // Image poubelle = new Image("Images/poubelle.png","poubelle");
+        // poubelle.addClassName("size_trash");
+        // divPoubelle.addClassName("trash");
+        // divPoubelle.add(poubelle);
 
         middleZone = new HorizontalLayout();
-
+        PoubelleContainerComponent poubelle = new PoubelleContainerComponent("Defausse");
         CardContainerComponent r1 = new CardContainerComponent(3,1,"25",false);
         CardContainerComponent r2 = new CardContainerComponent(3,2,"50",false);
         CardContainerComponent r3 = new CardContainerComponent(3,3,"75",false);
@@ -51,7 +52,7 @@ public class Plateau extends VerticalLayout {
         CardContainerComponent r6 = new CardContainerComponent(1,1,"feu vert",false);
         CardContainerComponent r7 = new CardContainerComponent(2,0,"botte",true);
         middleZone.addClassName("containerDepotCarte");
-        middleZone.add(r1,r2,r3,r4,r5,r6,r7);
+        middleZone.add(poubelle, r1,r2,r3,r4,r5,r6,r7);
 
         playerLeft = new HorizontalLayout();
         playerLeft.addClassName("playerRight");

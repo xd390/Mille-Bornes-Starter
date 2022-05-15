@@ -83,8 +83,16 @@ public class ObserverService {
         listeJoueur.get(new Random().nextInt(res.length)).setPeutJouer(true);
         */
     }
-    public static boolean ActionJoueur(Carte carte){
-        boolean isValid = carteService.jouerCarte(carte, getCurrentJoueur(), getCurrentAutreJoueur());
+    public static boolean ActionJoueur(Carte carte, String action){
+        boolean isValid = false;
+        System.out.println(action);
+        if (action == "jouer") {
+            isValid = carteService.jouerCarte(carte, getCurrentJoueur(), getCurrentAutreJoueur());
+        }
+        else if (action == "delete") {
+            JoueurService.defausserCarte(carte, getCurrentJoueur());
+            isValid = true;
+        }
         System.out.println(getCurrentJoueur());
         if (deck.size() == 0){
             finPartie();

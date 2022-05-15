@@ -5,7 +5,6 @@ import nc.unc.gl.borne.services.JoueurService;
 
 public class CarteService {
 
-    JoueurService JoueurService = new JoueurService();
 
     public boolean jouerCarte(Carte carteAJouer, Joueur joueur,Joueur joueurCibler) {
         int typeCarteAJouer = carteAJouer.getType();
