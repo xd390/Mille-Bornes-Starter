@@ -5,13 +5,13 @@ import com.vaadin.flow.component.dnd.DropEffect;
 import com.vaadin.flow.component.dnd.DropTarget;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.notification.Notification;
+import nc.unc.gl.borne.gui.component.normal.CardComponent;
 import nc.unc.gl.borne.modele.Carte;
 import nc.unc.gl.borne.services.ObserverService;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static nc.unc.gl.borne.services.ObserverService.getCurrentAutreJoueur;
 import static nc.unc.gl.borne.services.ObserverService.getCurrentJoueur;
 
 public class PoubelleContainerComponent extends Div implements DropTarget<CardComponent>, HasStyle {

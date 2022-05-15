@@ -4,12 +4,15 @@ package nc.unc.gl.borne;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.dependency.StyleSheet;
 import com.vaadin.flow.component.html.*;
-import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
 import nc.unc.gl.borne.gui.component.*;
+import nc.unc.gl.borne.gui.component.normal.CardComponent;
+import nc.unc.gl.borne.gui.component.normal.CardContainerComponent;
+import nc.unc.gl.borne.gui.component.parade.CardParadeConpoment;
+import nc.unc.gl.borne.gui.component.parade.CardParadeLimitVitesseComponent;
 import nc.unc.gl.borne.modele.Joueur;
 import nc.unc.gl.borne.services.JoueurService;
 import nc.unc.gl.borne.services.ObserverService;
@@ -93,7 +96,6 @@ public class Plateau extends VerticalLayout {
         dialog.setWidth("50%");
         dialog.open();
     }
-
 
     public void piocherCarte(){
         int nbCartes = getCurrentJoueur().getMain().size();

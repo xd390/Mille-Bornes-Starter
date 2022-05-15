@@ -1,14 +1,10 @@
 package nc.unc.gl.borne.gui.component;
 
 import com.vaadin.flow.component.HasStyle;
-import com.vaadin.flow.component.dnd.DropEffect;
 import com.vaadin.flow.component.html.Div;
-import com.vaadin.flow.component.html.Image;
-import com.vaadin.flow.component.notification.Notification;
-import nc.unc.gl.borne.modele.Carte;
+import nc.unc.gl.borne.gui.component.attaques.CardContainerAttackComponent;
+import nc.unc.gl.borne.gui.component.attaques.CardContainerLimitSpeedComponent;
 import nc.unc.gl.borne.modele.Joueur;
-
-import static nc.unc.gl.borne.services.ObserverService.getCurrentAutreJoueur;
 
 public class PlayerComponent extends Div implements HasStyle {
     private Joueur joueur;

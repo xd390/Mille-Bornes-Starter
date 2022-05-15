@@ -1,4 +1,4 @@
-package nc.unc.gl.borne.gui.component;
+package nc.unc.gl.borne.gui.component.normal;
 
 import com.vaadin.flow.component.HasStyle;
 import com.vaadin.flow.component.dnd.DragSource;
