@@ -68,11 +68,12 @@ public class ObserverService {
             return;
         check = true;
         deckService.initialiserDeck(deck);
-        Collection<Joueur> liste = sessions.values();
-        Object[] res = liste.toArray();
-        Joueur j1 = (Joueur) res[0];
-        Joueur j2 = (Joueur) res[1];
+
+        Joueur j1 = getCurrentJoueur();
+        Joueur j2 = getCurrentAutreJoueur();
+
         deckService.distribuerMain(deck, j1, j2);
+
         j1.setPeutJouer(true);
         System.out.println(sessions);
         /*
