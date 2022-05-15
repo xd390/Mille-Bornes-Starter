@@ -18,11 +18,8 @@ public class ObserverService {
     private static List<Joueur> listeJoueur = new ArrayList<>();
     private static boolean check = false;
 
-    private Joueur joueur;
-
     public ObserverService(Joueur joueur){
-        this.joueur = joueur;
-        sessions.put(this.joueur.getPseudo(), this.joueur);
+        sessions.put(joueur.getPseudo(), joueur);
     }
 
     public static void finTour(String nomJoueur){
