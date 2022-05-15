@@ -6,7 +6,7 @@ import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.dependency.StyleSheet;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.H1;
-import com.vaadin.flow.component.html.H2;
+import com.vaadin.flow.component.html.H3;
 import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
@@ -18,6 +18,7 @@ import nc.unc.gl.borne.modele.Carte;
 import nc.unc.gl.borne.modele.Joueur;
 import nc.unc.gl.borne.services.JoueurService;
 import nc.unc.gl.borne.services.ObserverService;
+import com.vaadin.flow.component.dialog.Dialog;
 
 import java.awt.*;
 
@@ -40,6 +41,7 @@ public class Plateau extends VerticalLayout {
         poubelle.addClassName("size_trash");
         divPoubelle.addClassName("trash");
         divPoubelle.add(poubelle);
+
 
 
         middleZone = new HorizontalLayout();
@@ -67,6 +69,7 @@ public class Plateau extends VerticalLayout {
         infoJ1.addClassName("position_of_info_j1");
         divJoueur1.add(infoJ1);
         footerZone.add(divJoueur1);
+        footerZone.add(divPoubelle);
 
         Div piocheCarte=new Div();
         piocheCarte.setId("piocheCarte");
