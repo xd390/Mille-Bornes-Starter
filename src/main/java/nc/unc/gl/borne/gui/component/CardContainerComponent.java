@@ -22,12 +22,14 @@ public class CardContainerComponent extends Div implements DropTarget<CardCompon
         private final JoueurService joueurService = new JoueurService();
         // TODO enlever les commentaires devant. private Joueur joueur;
         public CardContainerComponent(int type, int effet, String nameContainer, Boolean carteSpecifique){
+
+
             this.carteSpecifique = carteSpecifique;
             this.setActive(true);
             this.type = type;
             this.effet = effet;
             this.addClassName("rectangle");
-            //this.setText(nameContainer);
+            this.setText(nameContainer);
             this.setDropEffect(DropEffect.MOVE);
             this.addDropListener(e ->{
                 Notification.show("tentative de pose carte");
@@ -66,6 +68,7 @@ public class CardContainerComponent extends Div implements DropTarget<CardCompon
     public int getEffet() {
         return effet;
     }
+
 
     public boolean isCarteSpecifique() {
         return carteSpecifique;

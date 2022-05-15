@@ -17,6 +17,11 @@ public class DeckService {
         }
     }
 
+    /**
+     * Méthode permettant de créer les 106 cartes du jeu dans la pioche,
+     *  et de mélanger la pioche.
+     *  @param pioche le deck que l'on souhaite initialiser.
+     */
     public void initialiserDeck(Deck pioche) {
         int nb = 0;
         int effet = 0;

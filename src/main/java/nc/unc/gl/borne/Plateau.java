@@ -7,6 +7,7 @@ import com.vaadin.flow.component.dependency.StyleSheet;
 import com.vaadin.flow.component.dialog.Dialog;
 import com.vaadin.flow.component.html.*;
 import com.vaadin.flow.component.html.Image;
+import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
@@ -35,6 +36,7 @@ public class Plateau extends VerticalLayout {
         joueur2 = ObserverService.getCurrentAutreJoueur();
 
         middleZone = new HorizontalLayout();
+
         CardContainerComponent r1 = new CardContainerComponent(3,1,"25",false);
         CardContainerComponent r2 = new CardContainerComponent(3,2,"50",false);
         CardContainerComponent r3 = new CardContainerComponent(3,3,"75",false);
@@ -44,6 +46,9 @@ public class Plateau extends VerticalLayout {
         CardContainerComponent r7 = new CardContainerComponent(2,0,"botte",true);
         middleZone.addClassName("containerDepotCarte");
         middleZone.add(r1,r2,r3,r4,r5,r6,r7);
+
+
+
 
 
         playerLeft = new HorizontalLayout();
