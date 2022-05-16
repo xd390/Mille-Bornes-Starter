@@ -22,7 +22,11 @@ public class CardContainerAttackComponent extends Div implements DropTarget<Card
             this.setActive(true);
             this.setDropEffect(DropEffect.MOVE);
             this.addDropListener(e ->{
-                Notification.show("tentative de pose carte 2");
+                int nbCartes = getCurrentJoueur().getMain().size();
+                if (nbCartes < 7){
+                    Notification.show("Vous n'avez pas encore pioché");
+                    return;
+                }
                 if(e.getDropEffect() == DropEffect.MOVE) {
                     e.getDragData().ifPresent(data -> {
                         // the server side drag data is available if it has been set and the

@@ -27,9 +27,8 @@ import static nc.unc.gl.borne.services.ObserverService.getCurrentJoueur;
 public class Plateau extends VerticalLayout {
         private final HorizontalLayout playerLeft;
         private final HorizontalLayout middleZone;
-         private final HorizontalLayout upperZone;
+        private final HorizontalLayout upperZone;
         private final HorizontalLayout footerZone;
-
         private final Div divJoueur1=new Div();
         private final Div divPoubelle=new Div();
 

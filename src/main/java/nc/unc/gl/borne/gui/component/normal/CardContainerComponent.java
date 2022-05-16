@@ -33,8 +33,13 @@ public class CardContainerComponent extends Div implements DropTarget<CardCompon
             this.add(new Span(nameContainer),div);
             this.setDropEffect(DropEffect.MOVE);
             this.addDropListener(e ->{
-                Notification.show("tentative de pose carte 1");
+                int nbCartes = getCurrentJoueur().getMain().size();
+                if (nbCartes < 7){
+                    Notification.show("Vous n'avez pas encore pioché");
+                    return;
+                }
                 if(e.getDropEffect() == DropEffect.MOVE) {
+
                     e.getDragData().ifPresent(data -> {
                         // the server side drag data is available if it has been set and the
                         // component was dragged from the same UI as the drop target

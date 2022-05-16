@@ -17,12 +17,16 @@ public class CardContainerLimitSpeedComponent extends Div implements DropTarget<
     public CardContainerLimitSpeedComponent(){
         this.addClassName("cardPlayerMalus");
         div = new Div();
-        this.add(new Span("Carte attaque"),div);
+        this.add(new Span("Attaque limite de vitesse"), div);
         this.setActive(true);
         this.setDropEffect(DropEffect.MOVE);
         this.addDropListener(e ->{
-            Notification.show("tentative de pose carte 2");
             if(e.getDropEffect() == DropEffect.MOVE) {
+                int nbCartes = getCurrentJoueur().getMain().size();
+                if (nbCartes < 7){
+                    Notification.show("Vous n'avez pas encore pioché");
+                    return;
+                }
                 e.getDragData().ifPresent(data -> {
                     // the server side drag data is available if it has been set and the
                     // component was dragged from the same UI as the drop target
