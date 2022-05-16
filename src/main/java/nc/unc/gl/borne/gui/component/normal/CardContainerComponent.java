@@ -62,12 +62,12 @@ public class CardContainerComponent extends Div implements DropTarget<CardCompon
                                 Notification.show("Vous ne pouvez pas jouer cette carte ou ce n'est pas votre tour");
                             }
                         }
+                        else{
+                            Notification.show("Cette carte ne correspond au container");
+                        }
                         if (carte.getType() == 1 && carte.getEffet() == 1){
                             // clear p1/CardParadeCompoment si c'est un feu vert
 
-                        }
-                        else{
-                            Notification.show("Cette carte ne correspond au container");
                         }
                     });
                 }
