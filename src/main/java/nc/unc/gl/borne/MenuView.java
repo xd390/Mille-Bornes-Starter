@@ -10,11 +10,13 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
+import com.vaadin.flow.router.RouteAlias;
 import nc.unc.gl.borne.modele.Joueur;
 import nc.unc.gl.borne.services.ObserverService;
 
 
 @Route("menu")
+@RouteAlias("")
 @PageTitle("Menu")
 public class MenuView extends VerticalLayout {
 
