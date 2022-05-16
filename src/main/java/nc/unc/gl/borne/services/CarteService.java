@@ -97,6 +97,12 @@ public class CarteService {
                 if (joueur.getAttaque() !=null && joueur.getAttaque().getEffet()==carteAJouer.getEffet()) {
                     joueur.setAttaque(null);
                 }
+                if (joueur.getAttaque() !=null && joueur.getAttaque().getEffet()== 1 &&carteAJouer.getEffet()==2) {
+                    joueur.setAttaque(null);
+                }
+                if (joueur.getVitesse() !=null && carteAJouer.getEffet() == 1 || carteAJouer.getEffet() == 2) {
+                    joueur.setVitesse(null);
+                }
                 break;
 
 

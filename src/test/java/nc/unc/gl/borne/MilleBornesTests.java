@@ -43,7 +43,7 @@ public class MilleBornesTests {
         //accident
         Carte carte8 = new Carte(0,5);
         //Prioritaire
-        Carte carte9 = new Carte(2,1);
+        Carte carte9 = new Carte(2,2);
         //feu rouge
         Carte carte10 = new Carte(0,1);
         //limite de vitessee
@@ -61,6 +61,12 @@ public class MilleBornesTests {
         Joueur joueur2= new Joueur("tony");
         Joueur joueur3= new Joueur("flo");
         Joueur joueur4= new Joueur("Julien");
+        Joueur joueur5= new Joueur("joueur5");
+        joueur1.setPeutJouer(true);
+        joueur2.setPeutJouer(true);
+        joueur3.setPeutJouer(true);
+        joueur4.setPeutJouer(true);
+        joueur5.setPeutJouer(true);
         Deck laPioche = new Deck();
 
         System.out.println(carte.toString());
@@ -158,6 +164,16 @@ public class MilleBornesTests {
         System.out.println(joueur4.toString());
         carteService.jouerCarte(carte2,joueur4,joueur2);
         System.out.println(joueur4.toString());
+
+        System.out.println("---Joueur 5---");
+        carteService.jouerCarte(carte,joueur5,joueur2);
+        System.out.println(joueur5.toString());
+        carteService.jouerCarte(carte10,joueur1,joueur5);
+        System.out.println(joueur5.toString());
+        carteService.jouerCarte(carte11,joueur1,joueur5);
+        System.out.println(joueur5.toString());
+        carteService.jouerCarte(carte9,joueur5,joueur1);
+        System.out.println(joueur5.toString());
 
 
         //On initialise un deck qui créer 106 cartes et les mélanges
