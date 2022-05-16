@@ -6,7 +6,9 @@ import com.vaadin.flow.component.dnd.DropTarget;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.notification.Notification;
+import nc.unc.gl.borne.Plateau;
 import nc.unc.gl.borne.gui.component.normal.CardComponent;
+import nc.unc.gl.borne.gui.component.parade.CardParadeConpoment;
 import nc.unc.gl.borne.modele.Carte;
 import nc.unc.gl.borne.services.ObserverService;
 
@@ -59,6 +61,10 @@ public class CardContainerComponent extends Div implements DropTarget<CardCompon
                             else{
                                 Notification.show("Vous ne pouvez pas jouer cette carte ou ce n'est pas votre tour");
                             }
+                        }
+                        if (carte.getType() == 1 && carte.getEffet() == 1){
+                            // clear p1/CardParadeCompoment si c'est un feu vert
+
                         }
                         else{
                             Notification.show("Cette carte ne correspond au container");

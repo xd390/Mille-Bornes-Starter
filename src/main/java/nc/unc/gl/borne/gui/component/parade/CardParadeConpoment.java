@@ -18,6 +18,10 @@ public class CardParadeConpoment extends Div implements DropTarget<CardComponent
 
     private Div div;
 
+    public void clearDiv(){
+        div.removeAll();
+    }
+
     public void setAttaque(Carte carte) {
         div.removeAll();
         Image image = new Image(carte.getImageNom(), "Attaque");
@@ -25,6 +29,7 @@ public class CardParadeConpoment extends Div implements DropTarget<CardComponent
         image.addClassName("superpose_card");
         div.add(image);
     }
+
     public CardParadeConpoment(){
         div = new Div();
         div.addClassName("rectangle");
@@ -43,7 +48,7 @@ public class CardParadeConpoment extends Div implements DropTarget<CardComponent
                     // component was dragged from the same UI as the drop target
                     Carte res = (Carte) data;
                     boolean peutJouer = getCurrentJoueur().getPeutJouer();
-                    if(1 == res.getType() && res.getEffet() != 2 && res.getEffet() != 1 && ObserverService.ActionJoueur(res, "play") && peutJouer) {
+                    if(1 == res.getType() && (res.getEffet() != 2 && res.getEffet() != 1) && ObserverService.ActionJoueur(res, "play") && peutJouer) {
                         CardComponent carte = (CardComponent) e.getDragSourceComponent().get();
                         carte.getImage().removeClassName("size_of_card_player");
                         carte.getImage().removeClassName("space_between_img");
