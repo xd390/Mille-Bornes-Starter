@@ -4,6 +4,7 @@ import com.vaadin.flow.component.HasStyle;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.H4;
 import com.vaadin.flow.component.html.Image;
+import com.vaadin.flow.component.html.Span;
 import nc.unc.gl.borne.gui.component.attaques.CardContainerAttackComponent;
 import nc.unc.gl.borne.gui.component.attaques.CardContainerLimitSpeedComponent;
 import nc.unc.gl.borne.modele.Joueur;
@@ -46,13 +47,12 @@ public class PlayerComponent extends Div implements HasStyle {
         limiteVitesse = new CardContainerLimitSpeedComponent();
         Image imageTemp2 = new Image("/cartes/back.png","Posez la carte limite vitesse ici");
         imageTemp2.addClassName("cardMalusPlayerLeft");
-        limiteVitesse.add(imageTemp2);
+        limiteVitesse.getDiv().add(imageTemp2);
 
         bottes = new Div();
+        bottes.add(new Span("Bottes"));
         bottes.addClassName("cardPlayerBot");
         bottes.addClassName("superpose_card");
-        bottes.setId("img_bot"+cpt_bot);
-        cpt_bot++;
 
         add(infoJ2, derniereCarteJouer, malus, limiteVitesse ,bottes );
     }
