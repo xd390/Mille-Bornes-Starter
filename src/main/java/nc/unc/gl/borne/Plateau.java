@@ -103,7 +103,6 @@ public class Plateau extends VerticalLayout {
     }
 
     public void piocherCarte(){
-        infoJ1.setText("Score : "+String.valueOf(getCurrentJoueur().getPoints())+" player : "+getCurrentJoueur().getPseudo() + "Your turn : " + getCurrentJoueur().getPeutJouer());
         playerComponent.setInfoJ2("Score : "+getCurrentAutreJoueur().getPoints()+" player :"+getCurrentAutreJoueur().getPseudo());
         if (getCurrentJoueur().getAttaque() != null)
             p1.setAttaque(getCurrentJoueur().getAttaque());
@@ -131,6 +130,7 @@ public class Plateau extends VerticalLayout {
             JoueurService.piocherCarte(ObserverService.getDeck(), getCurrentJoueur());
             footerZone.add(new CardComponent(getCurrentJoueur().getMain().get(getCurrentJoueur().getMain().size()-1)));
         }
+        infoJ1.setText("Score : "+String.valueOf(getCurrentJoueur().getPoints())+" player : "+getCurrentJoueur().getPseudo() + " Your turn : " + getCurrentJoueur().getPeutJouer());
     }
     private void ajouterCarteDebut(){
         for(int i=0;i< getCurrentJoueur().getMain().size();i++){
