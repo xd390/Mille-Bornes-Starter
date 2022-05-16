@@ -103,6 +103,7 @@ public class Plateau extends VerticalLayout {
     }
 
     public void piocherCarte(){
+        infoJ1.setText("Score : "+String.valueOf(getCurrentJoueur().getPoints())+" player : "+getCurrentJoueur().getPseudo());
         playerComponent.setInfoJ2("Score : "+getCurrentAutreJoueur().getPoints()+" player :"+getCurrentAutreJoueur().getPseudo());
         if (getCurrentJoueur().getAttaque() != null)
             p1.setAttaque(getCurrentJoueur().getAttaque());
