@@ -188,8 +188,8 @@ span{
 
 .position_of_info_j1{
     position: fixed;
-    bottom: 0;
-    left: 5px;
+    top: 0;
+    right: 15px;
 }
 
 .size_trash{
