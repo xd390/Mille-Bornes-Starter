@@ -17,7 +17,7 @@ public class CardContainerLimitSpeedComponent extends Div implements DropTarget<
     public CardContainerLimitSpeedComponent(){
         this.addClassName("cardPlayerMalus");
         div = new Div();
-        this.add(new Span("Carte attaque"),div);
+        this.add(new Span("Carte attaque limitation de vitesse"),div);
         this.setActive(true);
         this.setDropEffect(DropEffect.MOVE);
         this.addDropListener(e ->{
@@ -41,5 +41,9 @@ public class CardContainerLimitSpeedComponent extends Div implements DropTarget<
                 });
             }
         });
+    }
+
+    public Div getDiv() {
+        return div;
     }
 }

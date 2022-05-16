@@ -41,7 +41,6 @@ public class MenuView extends VerticalLayout {
         menu.add(pseudo,play);
         Image titre = new Image("Images/MilleBorne.PNG","Titre");
         menu.add(pseudo, play);
-        titre = new Image("cartes/back.PNG","Titre");
 
         add(titre);
         add(menu);

@@ -38,6 +38,7 @@ public class Plateau extends VerticalLayout {
         PlayerComponent playerComponent;
 
         private H1 infoJ1;
+        private int cpt =0;
 
     public Plateau() {
         // Image poubelle = new Image("Images/poubelle.png","poubelle");
@@ -112,7 +113,12 @@ public class Plateau extends VerticalLayout {
             p2.setAttaque(getCurrentJoueur().getVitesse());
 
         int nbCartes = getCurrentJoueur().getMain().size();
-
+        if(cpt != getCurrentAutreJoueur().getImmunites().size()){
+            Image temp = new Image(getCurrentAutreJoueur().getImmunites().get(cpt).getImageNom(),"Bottes");
+            temp.setId("img_bot_"+cpt);
+            temp.addClassName("bottesPlayerLeft");
+            playerComponent.getBottes().add(temp);
+        }
         if (!getCurrentJoueur().getPeutJouer()){
             Notification.show("Ce n'est pas votre tour!");
         }
