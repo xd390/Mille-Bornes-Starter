@@ -22,7 +22,7 @@ public class ObserverService {
         this.sessions.put(getCurrent().getCsrfToken(), joueur);
     }
 
-    public static  void finTour() {
+    public static void finTour() {
         getCurrentJoueur().setPeutJouer(false);
         getCurrentAutreJoueur().setPeutJouer(true);
     }
