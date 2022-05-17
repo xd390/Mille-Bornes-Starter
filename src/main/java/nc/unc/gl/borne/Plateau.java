@@ -68,7 +68,7 @@ public class Plateau extends VerticalLayout {
 
         footerZone = new HorizontalLayout();
         footerZone.addClassName("footer");
-        infoJ1 = new H1("Score : "+String.valueOf(getCurrentJoueur().getPoints())+" player : "+getCurrentJoueur().getPseudo());
+        infoJ1 = new H1("Score : " + String.valueOf(getCurrentJoueur().getPoints())+" player : "+getCurrentJoueur().getPseudo());
         infoJ1.addClassName("style_txt");
         infoJ1.addClassName("position_of_info_j1");
         divJoueur1.add(infoJ1);
