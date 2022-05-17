@@ -32,7 +32,7 @@ public class CardContainerLimitSpeedComponent extends Div implements DropTarget<
                     // component was dragged from the same UI as the drop target
                     Carte res = (Carte) data;
                     boolean peutJouer = getCurrentJoueur().getPeutJouer();
-                    if(0 == res.getType() && res.getEffet() == 2 && ObserverService.ActionJoueur(res, "play") && peutJouer) {
+                    if(0 == res.getType() && res.getEffet() == 2 && ObserverService.actionJoueur(res, "play") && peutJouer) {
                         CardComponent carte = (CardComponent) e.getDragSourceComponent().get();
                         carte.getImage().removeClassName("size_of_card_player");
                         carte.getImage().removeClassName("space_between_img");

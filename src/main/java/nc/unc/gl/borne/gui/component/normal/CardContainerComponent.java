@@ -48,7 +48,7 @@ public class CardContainerComponent extends Div implements DropTarget<CardCompon
                         Carte carte = (Carte) data;
                         if(type == carte.getType() && effet == carte.getEffet() | carteSpecifique && type == carte.getType()){
                             boolean peutJouer = getCurrentJoueur().getPeutJouer();
-                            if(ObserverService.ActionJoueur(carte, "play") && peutJouer) {
+                            if(ObserverService.actionJoueur(carte, "play") && peutJouer) {
                                 CardComponent card = (CardComponent) e.getDragSourceComponent().get();
                                 card.getImage().removeClassName("size_of_card_player");
                                 card.getImage().removeClassName("space_between_img");

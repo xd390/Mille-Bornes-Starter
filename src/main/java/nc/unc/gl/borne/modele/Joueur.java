@@ -1,5 +1,6 @@
 package nc.unc.gl.borne.modele;
 
+import nc.unc.gl.borne.Plateau;
 import nc.unc.gl.borne.services.JoueurService;
 import java.util.ArrayList;
 

@@ -45,7 +45,7 @@ public class PoubelleContainerComponent extends Div implements DropTarget<CardCo
                     // component was dragged from the same UI as the drop target
                     Carte carte = (Carte) data;
                     boolean peutJouer = getCurrentJoueur().getPeutJouer();
-                    if(ObserverService.ActionJoueur(carte, "delete") && peutJouer) {
+                    if(ObserverService.actionJoueur(carte, "delete") && peutJouer) {
                         CardComponent card = (CardComponent) e.getDragSourceComponent().get();
                         card.getImage().removeClassName("size_of_card_player");
                         card.getImage().removeClassName("space_between_img");

@@ -73,6 +73,7 @@ public class MenuView extends VerticalLayout {
     }
 
     public void initPartie(){
+
         String name = pseudo.getValue();
         Joueur joueur = new Joueur(name);
         observer = new ObserverService(joueur);

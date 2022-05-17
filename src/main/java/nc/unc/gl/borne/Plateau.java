@@ -29,8 +29,8 @@ public class Plateau extends VerticalLayout {
         private final HorizontalLayout middleZone;
         private final HorizontalLayout upperZone;
         private final HorizontalLayout footerZone;
-        private final Div divJoueur1=new Div();
-        private final Div divPoubelle=new Div();
+        private final Div divJoueur1 = new Div();
+        private final Div divPoubelle = new Div();
 
         private CardParadeConpoment p1;
         private CardParadeLimitVitesseComponent p2;
@@ -40,10 +40,6 @@ public class Plateau extends VerticalLayout {
         private int cpt = 0;
 
     public Plateau() {
-        // Image poubelle = new Image("Images/poubelle.png","poubelle");
-        // poubelle.addClassName("size_trash");
-        // divPoubelle.addClassName("trash");
-        // divPoubelle.add(poubelle);
 
         upperZone = new HorizontalLayout();
         p1 = new CardParadeConpoment();
@@ -85,12 +81,17 @@ public class Plateau extends VerticalLayout {
         buttonPioche.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
         buttonPioche.addThemeVariants(ButtonVariant.LUMO_LARGE);
         piocheCarte.add(buttonPioche);
-        piocheCarte.addClickListener(buttonClickEvent -> piocherCarte());
+        piocheCarte.addClickListener(buttonClickEvent -> actionPiocher());
 
         add(playerLeft,upperZone, middleZone,footerZone);
         add(piocheCarte);
         ajouterCarteDebut();
+
+        if (getCurrentJoueur().getPeutJouer()){
+            piocherCarte();
+        }
     }
+
     public static void showDialog(String caption) {
         VerticalLayout dialogLayout = new VerticalLayout(new Div());
         dialogLayout.setWidth("10%");
@@ -102,23 +103,11 @@ public class Plateau extends VerticalLayout {
         dialog.open();
     }
 
-    public void piocherCarte(){
-        infoJ1.setText("Score : "+String.valueOf(getCurrentJoueur().getPoints())+" player : "+getCurrentJoueur().getPseudo());
-        playerComponent.setInfoJ2("Score : "+getCurrentAutreJoueur().getPoints()+" player :"+getCurrentAutreJoueur().getPseudo());
+    public static void showNotification(String notif){
+        Notification.show(notif);
+    }
 
-        if (getCurrentAutreJoueur().getPoints() == 1000){
-            ObserverService.finPartie("Fin de partie! Bravo au joueur " + getCurrentAutreJoueur().getPseudo());
-            return;
-        }
-
-        if (getCurrentJoueur().getAttaque() != null)
-            p1.setAttaque(getCurrentJoueur().getAttaque());
-
-        if (getCurrentJoueur().getVitesse() != null)
-            p2.setAttaque(getCurrentJoueur().getVitesse());
-
-        int nbCartes = getCurrentJoueur().getMain().size();
-
+    public void updateBottes(){
         if(cpt != getCurrentAutreJoueur().getImmunites().size()){
             Image temp = new Image(getCurrentAutreJoueur().getImmunites().get(cpt).getImageNom(),"Bottes");
             temp.setId("img_bot_"+cpt);
@@ -126,23 +115,55 @@ public class Plateau extends VerticalLayout {
             playerComponent.getBottes().add(temp);
             cpt++;
         }
+    }
+
+    public void updateStatus(){
+        infoJ1.setText("Score : "+String.valueOf(getCurrentJoueur().getPoints())+" player : "+getCurrentJoueur().getPseudo());
+        playerComponent.setInfoJ2("Score : "+getCurrentAutreJoueur().getPoints()+" player :"+getCurrentAutreJoueur().getPseudo());
+    }
+
+    public void updateMalus(){
+        if (getCurrentJoueur().getAttaque() != null)
+            p1.setAttaque(getCurrentJoueur().getAttaque());
+
+        if (getCurrentJoueur().getVitesse() != null)
+            p2.setAttaque(getCurrentJoueur().getVitesse());
+    }
+
+    public void piocherCarte(){
+        JoueurService.piocherCarte(ObserverService.getDeck(), getCurrentJoueur());
+        footerZone.add(new CardComponent(getCurrentJoueur().getMain().get(getCurrentJoueur().getMain().size()-1)));
+    }
+
+    public void actionPiocher(){
+        updateStatus();
+
+        if (getCurrentAutreJoueur().getPoints() == 1000){
+            ObserverService.finPartie("Fin de partie! Bravo au joueur " + getCurrentAutreJoueur().getPseudo());
+            return;
+        }
+
+        updateMalus();
+        updateBottes();
+
         if (!getCurrentJoueur().getPeutJouer()){
             Notification.show("Ce n'est pas votre tour!");
             return;
         }
+
+        int nbCartes = getCurrentJoueur().getMain().size();
         if (nbCartes > 6){
             Notification.show("Vous avez trop de cartes");
+            return;
         }
-        else{
-            JoueurService.piocherCarte(ObserverService.getDeck(), getCurrentJoueur());
-            footerZone.add(new CardComponent(getCurrentJoueur().getMain().get(getCurrentJoueur().getMain().size()-1)));
-        }
-        infoJ1.setText("Score : "+String.valueOf(getCurrentJoueur().getPoints())+" player : "+getCurrentJoueur().getPseudo());
+
+        piocherCarte();
+        updateStatus();
     }
+
     private void ajouterCarteDebut(){
         for(int i=0;i< getCurrentJoueur().getMain().size();i++){
             footerZone.add(new CardComponent(getCurrentJoueur().getMain().get(i)));
         }
     }
-
 }
