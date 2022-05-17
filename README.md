@@ -11,8 +11,11 @@ Vous pouvez ouvrir le projet
 Participant au projet :
 
 Anthony NGPAN
+
 Florian JEAN-BAPTISTE
+
 Thomas TRINH DUNG
+
 Julien LECOCQ
 
 Liens :
